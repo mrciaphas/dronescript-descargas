@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DroneScript — Descargar</title>
-<meta name="description" content="Programación por bloques para drones DJI Tello y Parrot Anafi. Descarga el instalador para Windows.">
+<meta name="description" content="Programación por bloques para drones DJI Tello, CoDrone EDU y VEX AIR. Descarga el instalador para Windows.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='2' y='2' width='60' height='60' rx='13' fill='%230d1117'/%3E%3Cg stroke='%232f81f7' stroke-width='4.4'%3E%3Cpath d='M32 32 15 15M32 32 49 15M32 32 15 49M32 32 49 49'/%3E%3Cg fill='%23161b22' stroke-width='2.2'%3E%3Ccircle cx='15' cy='15' r='9.4'/%3E%3Ccircle cx='49' cy='15' r='9.4'/%3E%3Ccircle cx='15' cy='49' r='9.4'/%3E%3Ccircle cx='49' cy='49' r='9.4'/%3E%3C/g%3E%3C/g%3E%3Crect x='24' y='24' width='16' height='16' fill='%232f81f7'/%3E%3C/svg%3E">
 <style>
 :root {
@@ -77,7 +77,7 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; color: var(-
       <circle cx="32" cy="29.5" r="2.8" fill="#e6edf3"/>
     </svg>
     <h1>DRONESCRIPT</h1>
-    <p class="tag">Programa drones con bloques. Arma la misión, mira el código Python que genera y vuela un DJI Tello de verdad.</p>
+    <p class="tag">Programa drones con bloques. Arma la misión, mira el código Python que genera y vuela un DJI Tello o un CoDrone EDU de verdad.</p>
     <a class="btn" id="download" href="https://github.com/mrciaphas/dronescript-descargas/releases/latest/download/DroneScript-Setup.exe">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16"/></svg>
       Descargar para Windows
@@ -94,6 +94,16 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; color: var(-
       <div class="card"><h3>Python de verdad</h3><p>Cada bloque genera su código. Puedes leerlo, aprender de él y guardarlo.</p></div>
       <div class="card"><h3>Seguridad</h3><p>Límites de altura y velocidad, Detener y aterrizar con una tecla, aterrizaje automático al acabar.</p></div>
       <div class="card"><h3>Simulador</h3><p>Prueba tus misiones sin dron antes de volar el Tello.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Drones</h2>
+    <div class="grid">
+      <div class="card"><h3>DJI Tello / Tello EDU</h3><p>Por Wi-Fi, con telemetría, cámara, fotos y vídeo.</p></div>
+      <div class="card"><h3>CoDrone EDU</h3><p>Con su mando conectado al PC por USB. Sin cámara.</p></div>
+      <div class="card"><h3>VEX AIR</h3><p>Genera el código Python para pegarlo en VEXcode AIR y cargarlo en el mando.</p></div>
+      <div class="card"><h3>Simulador</h3><p>Sin hardware: tiempos, batería y límites simulados.</p></div>
     </div>
   </section>
 
@@ -128,11 +138,34 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; color: var(-
   </section>
 
   <section>
+    <h2>Conectar el CoDrone EDU</h2>
+    <ol>
+      <li>Enciende el dron y comprueba que está emparejado con su mando.</li>
+      <li>Conecta el mando al PC con un cable USB de datos y ciérrale otros programas (CoDrone EDU Blockly…).</li>
+      <li>En DroneScript: botón del dron → <strong>CoDrone EDU</strong> → <strong>Conectar</strong>.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Usar VEX AIR</h2>
+    <ol>
+      <li>Elige <strong>VEX AIR</strong> en el botón del dron y arma el programa con bloques.</li>
+      <li>Pulsa <strong>Copiar código</strong>.</li>
+      <li>En VEXcode AIR: <em>Archivo → Nuevo proyecto Python</em>, pega el código debajo de las líneas iniciales y descárgalo al mando.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Actualizar</h2>
+    <p>Cuando hay una versión nueva, junto al logo de la app aparece <strong>nueva versión</strong>. Púlsalo y elige <strong>Descargar e instalar</strong>: DroneScript se actualiza y se vuelve a abrir sola. Las versiones anteriores a la 1.1.0 no tienen este botón: descarga el instalador desde esta página e instálalo encima.</p>
+  </section>
+
+  <section>
     <h2>Tus archivos</h2>
     <p>Los bloques, las misiones ejecutadas y las fotos se guardan en <code>Documentos\DroneScript</code>. Desinstalar la app no los borra.</p>
   </section>
 </main>
 
-<footer>DroneScript · programación por bloques para DJI Tello y Parrot Anafi</footer>
+<footer>DroneScript · programación por bloques para DJI Tello, CoDrone EDU y VEX AIR</footer>
 </body>
 </html>
