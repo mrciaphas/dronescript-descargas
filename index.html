@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DroneScript — Descargar</title>
+<meta name="description" content="Programación por bloques para drones DJI Tello y Parrot Anafi. Descarga el instalador para Windows.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='2' y='2' width='60' height='60' rx='13' fill='%230d1117'/%3E%3Cg stroke='%232f81f7' stroke-width='4.4'%3E%3Cpath d='M32 32 15 15M32 32 49 15M32 32 15 49M32 32 49 49'/%3E%3Cg fill='%23161b22' stroke-width='2.2'%3E%3Ccircle cx='15' cy='15' r='9.4'/%3E%3Ccircle cx='49' cy='15' r='9.4'/%3E%3Ccircle cx='15' cy='49' r='9.4'/%3E%3Ccircle cx='49' cy='49' r='9.4'/%3E%3C/g%3E%3C/g%3E%3Crect x='24' y='24' width='16' height='16' fill='%232f81f7'/%3E%3C/svg%3E">
+<style>
+:root {
+  --bg: #0d1117; --panel: #161b22; --card: #1c2128; --border: #30363d;
+  --pri: #e6edf3; --sec: #8b949e; --accent: #2f81f7; --teal: #3fb950; --yellow: #d29922;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body {
+  margin: 0; background: var(--bg); color: var(--pri);
+  font: 16px/1.6 -apple-system, "Segoe UI", system-ui, Roboto, sans-serif;
+}
+.wrap { max-width: 860px; margin: 0 auto; padding: 0 16px; }
+header { padding: 64px 0 40px; text-align: center; border-bottom: 1px solid var(--border);
+  background: radial-gradient(ellipse at top, rgba(47,129,247,.14), transparent 65%); }
+.logo { width: 88px; height: 88px; }
+h1 { margin: 12px 0 4px; font-size: 40px; letter-spacing: .06em; color: var(--accent); }
+.tag { margin: 0 auto 28px; max-width: 560px; color: var(--sec); font-size: 18px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px;
+  background: #238636; border: 1px solid #2ea043; border-radius: 8px;
+  color: #fff; font-size: 18px; font-weight: 600; text-decoration: none;
+}
+.btn:hover { background: #2ea043; }
+.btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.btn svg { width: 22px; height: 22px; }
+.meta { margin-top: 12px; color: var(--sec); font-size: 14px; }
+.meta a { color: var(--sec); }
+main { padding: 40px 0 24px; }
+section { margin-bottom: 40px; }
+h2 { font-size: 22px; margin: 0 0 14px; }
+p, li { color: #c9d1d9; }
+a { color: var(--accent); }
+.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+.card h3 { margin: 0 0 6px; font-size: 16px; }
+.card p { margin: 0; font-size: 15px; color: var(--sec); }
+.note { background: rgba(210,153,34,.1); border: 1px solid rgba(210,153,34,.45); border-left-width: 4px;
+  border-radius: 8px; padding: 16px 20px; }
+.note h2 { color: var(--yellow); }
+ol { padding-left: 22px; margin: 0; }
+li { margin-bottom: 8px; }
+li::marker { color: var(--sec); }
+kbd, code { background: var(--card); border: 1px solid var(--border); border-radius: 5px;
+  padding: 1px 6px; font: 14px Consolas, "SF Mono", monospace; color: var(--pri); }
+footer { border-top: 1px solid var(--border); padding: 24px 0 40px; color: var(--sec); font-size: 14px; text-align: center; }
+@media (max-width: 600px) {
+  header { padding: 44px 0 32px; }
+  h1 { font-size: 32px; }
+  .btn { width: 100%; justify-content: center; }
+  .grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <svg class="logo" viewBox="0 0 64 64" aria-hidden="true">
+      <rect x="2" y="2" width="60" height="60" rx="13" fill="#0d1117" stroke="#30363d"/>
+      <g stroke="#2f81f7" stroke-width="4.4" stroke-linecap="round">
+        <path d="M32 32 15 15M32 32 49 15M32 32 15 49M32 32 49 49"/>
+        <g fill="#161b22" stroke-width="2.2">
+          <circle cx="15" cy="15" r="9.4"/><circle cx="49" cy="15" r="9.4"/>
+          <circle cx="15" cy="49" r="9.4"/><circle cx="49" cy="49" r="9.4"/>
+        </g>
+      </g>
+      <g fill="#e6edf3"><circle cx="15" cy="15" r="2.6"/><circle cx="49" cy="15" r="2.6"/>
+        <circle cx="15" cy="49" r="2.6"/><circle cx="49" cy="49" r="2.6"/></g>
+      <rect x="24" y="24" width="16" height="16" rx="1.5" fill="#2f81f7"/>
+      <circle cx="32" cy="29.5" r="2.8" fill="#e6edf3"/>
+    </svg>
+    <h1>DRONESCRIPT</h1>
+    <p class="tag">Programa drones con bloques. Arma la misión, mira el código Python que genera y vuela un DJI Tello de verdad.</p>
+    <a class="btn" id="download" href="https://github.com/mrciaphas/dronescript-descargas/releases/latest/download/DroneScript-Setup.exe">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16"/></svg>
+      Descargar para Windows
+    </a>
+    <div class="meta">Windows 10 / 11 (64 bits) · <a href="https://github.com/mrciaphas/dronescript-descargas/releases">todas las versiones</a></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section>
+    <h2>Qué es</h2>
+    <div class="grid">
+      <div class="card"><h3>Bloques</h3><p>Despegar, moverse, girar, flips, fotos y vídeo, bucles y condiciones, sin escribir código.</p></div>
+      <div class="card"><h3>Python de verdad</h3><p>Cada bloque genera su código. Puedes leerlo, aprender de él y guardarlo.</p></div>
+      <div class="card"><h3>Seguridad</h3><p>Límites de altura y velocidad, Detener y aterrizar con una tecla, aterrizaje automático al acabar.</p></div>
+      <div class="card"><h3>Simulador</h3><p>Prueba tus misiones sin dron antes de volar el Tello.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Instalar</h2>
+    <ol>
+      <li>Descarga <code>DroneScript-Setup.exe</code> con el botón de arriba.</li>
+      <li>Ábrelo y sigue el asistente. Crea un acceso directo en el escritorio y en el menú Inicio.</li>
+      <li>No hace falta instalar Python ni nada más.</li>
+    </ol>
+  </section>
+
+  <section class="note">
+    <h2>Si Windows muestra «Windows protegió su PC»</h2>
+    <p>El instalador no está firmado digitalmente, así que SmartScreen avisa la primera vez. Para continuar:</p>
+    <ol>
+      <li>Haz clic en <strong>Más información</strong>.</li>
+      <li>Pulsa <strong>Ejecutar de todas formas</strong>.</li>
+    </ol>
+    <p>Si el navegador marca la descarga como poco común, elige <strong>Conservar</strong> en el menú de la descarga.</p>
+  </section>
+
+  <section>
+    <h2>Conectar el DJI Tello</h2>
+    <ol>
+      <li>Carga la batería, enciende el Tello y conecta el PC a su Wi-Fi <code>TELLO-XXXXXX</code>. El PC pierde internet mientras tanto; es normal.</li>
+      <li>Abre DroneScript, pulsa el botón del dron (arriba a la derecha), elige <strong>DJI Tello</strong> y luego <strong>Conectar</strong>.</li>
+      <li>La barra superior debe mostrar batería, altura, etc. Si Windows pregunta por el firewall, permite DroneScript también en <strong>redes públicas</strong>: si no, no llega la telemetría.</li>
+      <li>Arma el programa, revisa los límites (▲ Parámetros) y pulsa <strong>Ejecutar</strong>.</li>
+    </ol>
+    <p>En cualquier momento: <kbd>L</kbd> aterriza y <kbd>E</kbd> apaga los motores (el dron cae: sólo emergencias). Haz las primeras pruebas en interior, con espacio despejado, y con el Simulador antes del dron real.</p>
+  </section>
+
+  <section>
+    <h2>Tus archivos</h2>
+    <p>Los bloques, las misiones ejecutadas y las fotos se guardan en <code>Documentos\DroneScript</code>. Desinstalar la app no los borra.</p>
+  </section>
+</main>
+
+<footer>DroneScript · programación por bloques para DJI Tello y Parrot Anafi</footer>
+</body>
+</html>
