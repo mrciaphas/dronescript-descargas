@@ -1,7 +1,7 @@
 # DroneScript — descargas
 
-Programación por bloques para drones DJI Tello y CoDrone EDU, y generador de código
-para VEX AIR.
+Programación por bloques para drones DJI Tello, CoDrone EDU y Parrot Anafi (en pruebas),
+y generador de código para VEX AIR. Otros drones se pueden añadir importando su modelo.
 
 **Descargar para Windows:** <https://mrciaphas.github.io/dronescript-descargas/>
 
