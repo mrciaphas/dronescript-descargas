@@ -94,6 +94,8 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; color: var(-
       <div class="card"><h3>Python de verdad</h3><p>Cada bloque genera su código. Puedes leerlo, aprender de él y guardarlo.</p></div>
       <div class="card"><h3>Seguridad</h3><p>Límites de altura y velocidad, Detener y aterrizar con una tecla, aterrizaje automático al acabar.</p></div>
       <div class="card"><h3>Proyectos y ejemplos</h3><p>Guarda tus programas con nombre, deshaz cambios con Ctrl+Z y empieza desde ejemplos listos.</p></div>
+      <div class="card"><h3>Visión para competencias</h3><p>Bloques que ven marcadores ArUco (como el 5x5 ID 100 de TMR e IMAV), compuertas de color y códigos QR, se acercan al marcador y se centran en un color. Con vista de cámara en vivo.</p></div>
+      <div class="card"><h3>Módulo a bordo</h3><p>Un ESP32 por Bluetooth suelta la carga (servo o electroimán) y mide el sonido con su micrófono, para buscar la bocina. El programa del ESP32 viene incluido.</p></div>
       <div class="card"><h3>Importa tu dron</h3><p>¿Tu dron no está en la lista? Con la plantilla puedes crear su modelo e importarlo, o importar el que te comparta alguien de confianza.</p></div>
     </div>
   </section>
@@ -101,11 +103,11 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; color: var(-
   <section>
     <h2>Drones</h2>
     <div class="grid">
-      <div class="card"><h3>DJI Tello / Tello EDU</h3><p>Por Wi-Fi, con telemetría, cámara, fotos y vídeo.</p></div>
+      <div class="card"><h3>DJI Tello / Tello EDU</h3><p>Por Wi-Fi, con telemetría, cámara, fotos y vídeo, y visión (ArUco, colores, QR).</p></div>
       <div class="card"><h3>CoDrone EDU</h3><p>Con su mando conectado al PC por USB. Sensor frontal, sensor de color (con el dron apoyado sobre el color), LED y pitido. Sin cámara.</p></div>
-      <div class="card"><h3>Parrot Anafi <small>(en pruebas)</small></h3><p>Por Wi-Fi, sin Olympe: funciona en Windows. Telemetría, cámara en directo, fotos y vídeo, y gimbal.</p></div>
+      <div class="card"><h3>Parrot Anafi <small>(en pruebas)</small></h3><p>Por Wi-Fi, sin Olympe: funciona en Windows. Telemetría, cámara en directo, fotos y vídeo, gimbal y visión.</p></div>
       <div class="card"><h3>VEX AIR</h3><p>Genera el código Python para cargarlo en el mando.</p></div>
-      <div class="card"><h3>Simulador</h3><p>Sin hardware: tiempos, batería y límites simulados.</p></div>
+      <div class="card"><h3>Simulador</h3><p>Sin hardware: tiempos, batería y límites simulados, en una sala con un ArUco, compuertas de color y una caja que suena para probar la visión y el sonido.</p></div>
     </div>
   </section>
 
@@ -154,6 +156,16 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; color: var(-
       <li>Elige <strong>VEX AIR</strong> en el botón del dron y arma el programa con bloques.</li>
       <li>Pulsa <strong>Copiar código</strong>.</li>
       <li>En VEXcode AIR: <em>Archivo → Nuevo proyecto Python</em>, pega el código debajo de las líneas iniciales y descárgalo al mando.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Visión y módulo a bordo</h2>
+    <ol>
+      <li>En el panel de parámetros (▲) elige el tipo de marcador ArUco y su tamaño: para TMR / IMAV, <strong>5x5</strong> y <strong>20 cm</strong>.</li>
+      <li>Usa los bloques de <strong>Visión</strong> («acercarse al ArUco», «centrarse en color») y los sensores nuevos en <em>si / mientras / esperar hasta</em>. El botón <strong>📹 Cámara</strong> muestra lo que ve el dron con lo detectado encima.</li>
+      <li>Para soltar carga y oír la bocina: carga <code>docs/esp32_modulo</code> en un ESP32, empareja <strong>DroneScript-Modulo</strong> por Bluetooth en Windows y conéctalo con el botón <strong>🔌 Módulo</strong>. Sin ESP32, el sonido también puede venir del micrófono de la PC.</li>
+      <li>Pruébalo todo antes con el <strong>Simulador</strong>: tiene un ArUco en la pared, compuertas roja y verde y una caja que suena.</li>
     </ol>
   </section>
 
