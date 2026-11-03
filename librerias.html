@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agregar librerías — DroneScript</title>
+<meta name="description" content="Cómo agregar librerías de Python y bloques propios a DroneScript.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='2' y='2' width='60' height='60' rx='13' fill='%230d1117'/%3E%3Cg stroke='%232f81f7' stroke-width='4.4'%3E%3Cpath d='M32 32 15 15M32 32 49 15M32 32 15 49M32 32 49 49'/%3E%3Cg fill='%23161b22' stroke-width='2.2'%3E%3Ccircle cx='15' cy='15' r='9.4'/%3E%3Ccircle cx='49' cy='15' r='9.4'/%3E%3Ccircle cx='15' cy='49' r='9.4'/%3E%3Ccircle cx='49' cy='49' r='9.4'/%3E%3C/g%3E%3C/g%3E%3Crect x='24' y='24' width='16' height='16' fill='%232f81f7'/%3E%3C/svg%3E">
+<style>
+:root {
+  --bg: #0d1117; --panel: #161b22; --card: #1c2128; --border: #30363d;
+  --pri: #e6edf3; --sec: #8b949e; --accent: #2f81f7; --teal: #3fb950; --yellow: #d29922;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body {
+  margin: 0; background: var(--bg); color: var(--pri);
+  font: 16px/1.6 -apple-system, "Segoe UI", system-ui, Roboto, sans-serif;
+}
+.wrap { max-width: 860px; margin: 0 auto; padding: 0 16px; }
+header { padding: 64px 0 40px; text-align: center; border-bottom: 1px solid var(--border);
+  background: radial-gradient(ellipse at top, rgba(47,129,247,.14), transparent 65%); }
+.logo { width: 88px; height: 88px; }
+h1 { margin: 12px 0 4px; font-size: 40px; letter-spacing: .06em; color: var(--accent); }
+.tag { margin: 0 auto 28px; max-width: 560px; color: var(--sec); font-size: 18px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px;
+  background: #238636; border: 1px solid #2ea043; border-radius: 8px;
+  color: #fff; font-size: 18px; font-weight: 600; text-decoration: none;
+}
+.btn:hover { background: #2ea043; }
+.btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.btn svg { width: 22px; height: 22px; }
+.meta { margin-top: 12px; color: var(--sec); font-size: 14px; }
+.meta a { color: var(--sec); }
+main { padding: 40px 0 24px; }
+section { margin-bottom: 40px; }
+h2 { font-size: 22px; margin: 0 0 14px; }
+p, li { color: #c9d1d9; }
+a { color: var(--accent); }
+.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+.card h3 { margin: 0 0 6px; font-size: 16px; }
+.card p { margin: 0; font-size: 15px; color: var(--sec); }
+.note { background: rgba(210,153,34,.1); border: 1px solid rgba(210,153,34,.45); border-left-width: 4px;
+  border-radius: 8px; padding: 16px 20px; }
+.note h2 { color: var(--yellow); }
+ol { padding-left: 22px; margin: 0; }
+li { margin-bottom: 8px; }
+li::marker { color: var(--sec); }
+kbd, code { background: var(--card); border: 1px solid var(--border); border-radius: 5px;
+  padding: 1px 6px; font: 14px Consolas, "SF Mono", monospace; color: var(--pri); }
+footer { border-top: 1px solid var(--border); padding: 24px 0 40px; color: var(--sec); font-size: 14px; text-align: center; }
+@media (max-width: 600px) {
+  header { padding: 44px 0 32px; }
+  h1 { font-size: 32px; }
+  .btn { width: 100%; justify-content: center; }
+  .grid { grid-template-columns: 1fr; }
+}
+
+nav { padding: 18px 0; border-bottom: 1px solid var(--border); }
+nav a { text-decoration: none; }
+h1.page { font-size: 30px; letter-spacing: 0; color: var(--pri); margin: 32px 0 6px; }
+.lead { color: var(--sec); font-size: 17px; margin: 0 0 8px; }
+h3 { font-size: 17px; margin: 22px 0 8px; }
+pre { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px;
+  overflow-x: auto; font: 13px/1.5 Consolas, "SF Mono", monospace; color: var(--pri); margin: 10px 0 16px; }
+pre code { background: none; border: 0; padding: 0; font: inherit; }
+table { border-collapse: collapse; width: 100%; margin: 10px 0 16px; font-size: 15px; }
+th, td { border: 1px solid var(--border); padding: 7px 10px; text-align: left; vertical-align: top; color: #c9d1d9; }
+th { background: var(--panel); color: var(--pri); }
+.dl { display: inline-block; margin: 4px 0 6px; font-size: 15px; }
+ul { padding-left: 22px; } ul li { margin-bottom: 6px; }
+</style>
+</head>
+<body>
+<nav><div class="wrap"><a href="./">&larr; DroneScript</a></div></nav>
+<main class="wrap">
+
+<h1 class="page">Agregar librerías y bloques propios</h1>
+<p class="lead">Amplía DroneScript con bloques nuevos escritos en Python, usando librerías que la app no trae o sólo tu propio código.</p>
+<p>Necesitas <strong>DroneScript 1.5 o más nuevo</strong>: al final de la paleta tiene que aparecer <strong>Extensiones y librerías…</strong>.</p>
+
+<section>
+<h2>La idea</h2>
+<ul>
+<li><strong>Una librería</strong> es código que ya escribió otra persona (por ejemplo MediaPipe, que encuentra los puntos de una mano en una foto). Se instala desde PyPI, como con <code>pip install</code>.</li>
+<li><strong>Una extensión</strong> es un archivo <code>.py</code> que escribes tú. Declara los bloques nuevos de la paleta y lo que hace cada uno; puede usar librerías o sólo tu propio código.</li>
+</ul>
+<p>Toda extensión tiene tres partes:</p>
+<table>
+<tr><th>Parte</th><th>Qué es</th></tr>
+<tr><td><code>EXTENSION = {...}</code></td><td>Id, nombre, librerías que necesita (<code>"librerias"</code>) y archivos que descargar (<code>"archivos"</code>).</td></tr>
+<tr><td><code>BLOQUES = [...]</code></td><td>Los bloques nuevos. <strong>Acción</strong>: un bloque que hace algo, con hasta 3 casillas. <strong>Sensor</strong>: aparece en las condiciones de <em>si</em>, <em>while</em> y <em>esperar hasta</em>, y devuelve un número, sí/no o un texto.</td></tr>
+<tr><td><code>def funcion(drone, ...)</code></td><td>Una función por bloque. Recibe <code>drone</code> (el mismo objeto de las misiones) y los valores de sus casillas, en orden.</td></tr>
+</table>
+<p>Con <code>drone</code> puedes moverte (<code>drone.move_forward(50)</code>, <code>drone.rotate_clockwise(90)</code>), leer sensores (<code>drone.get_battery()</code>, <code>drone.get_height()</code>, <code>drone.sees_aruco(100)</code>), pedir la imagen de la cámara (<code>drone.get_frame()</code>), escribir en la consola (<code>drone.log("texto")</code>) y esperar (<code>drone.wait(segundos)</code>, que se corta al pulsar Detener).</p>
+<p><strong>Seguridad:</strong> una extensión es código Python con los mismos permisos que DroneScript. Al importarla, la app la lee sin ejecutarla, te muestra qué hace y su huella SHA-256, y sólo la ejecuta mientras el archivo siga siendo exactamente el que aprobaste. Importa sólo extensiones de personas de confianza.</p>
+</section>
+
+<section>
+<h2>Plantilla</h2>
+<p>Un punto de partida con dos tipos de sensor y dos acciones. También la guarda la app: <strong>Extensiones y librerías… → Guardar plantilla</strong>.</p>
+<a class="dl" href="plantillas/plantilla_extension.py" download>Descargar plantilla_extension.py</a>
+<pre><code>&quot;&quot;&quot;Plantilla de extensión para DroneScript.
+
+Una extensión añade bloques propios a la paleta. Copia este archivo, cambia el «id» y el
+«nombre», escribe tus funciones e impórtalo en DroneScript: Extensiones y librerías → «+ Importar extensión».
+
+Reglas:
+- EXTENSION y BLOQUES sólo pueden tener valores fijos (textos, números, listas, diccionarios):
+  DroneScript los lee SIN ejecutar el archivo para mostrarte qué hace antes de importarlo.
+- Cada bloque llama a una función de este archivo. La función recibe primero `drone` (el mismo
+  objeto que usan los bloques: drone.takeoff(), drone.move_forward(50), drone.get_battery(),
+  drone.get_frame(), drone.log(&quot;texto&quot;)…) y después los valores escritos en el bloque.
+- tipo &quot;accion&quot;: un bloque que hace algo (con hasta 3 valores, número o texto).
+- tipo &quot;sensor&quot;: aparece en los bloques «si», «while» y «esperar hasta». Su función devuelve
+  un número (&quot;numero&quot;), True / False (&quot;si_no&quot;) o un texto (&quot;texto&quot;).
+- Si usas una librería que no viene con DroneScript, ponla en &quot;librerias&quot; (el nombre de pip):
+  la app la instala con «Instalar lo que falta». Ejemplo completo con MediaPipe: manos.py.
+- Al cambiar el archivo hay que volver a importarlo (la app sólo ejecuta lo que aprobaste).
+&quot;&quot;&quot;
+
+import random
+import time
+
+EXTENSION = {
+    &quot;id&quot;: &quot;mi_extension&quot;,              # minúsculas, números y _ ; único
+    &quot;nombre&quot;: &quot;Mi extensión&quot;,
+    &quot;descripcion&quot;: &quot;Bloques de ejemplo: azar, hora, mensajes y un cuadrado.&quot;,
+    &quot;autor&quot;: &quot;Tu nombre&quot;,
+    &quot;version&quot;: &quot;1.0&quot;,
+    &quot;color&quot;: &quot;#0f6b6b&quot;,                # color de los bloques (#rrggbb)
+    &quot;librerias&quot;: [],                   # p. ej. [&quot;mediapipe&quot;] — nombres de pip
+    &quot;archivos&quot;: [],                    # p. ej. [{&quot;nombre&quot;: &quot;modelo.task&quot;, &quot;url&quot;: &quot;https://…&quot;, &quot;sha256&quot;: &quot;…&quot;}]
+}
+
+BLOQUES = [
+    # sensores
+    {&quot;funcion&quot;: &quot;azar&quot;, &quot;tipo&quot;: &quot;sensor&quot;, &quot;texto&quot;: &quot;número al azar (1–6)&quot;, &quot;valor&quot;: &quot;numero&quot;},
+    {&quot;funcion&quot;: &quot;hora&quot;, &quot;tipo&quot;: &quot;sensor&quot;, &quot;texto&quot;: &quot;hora del día (0–23)&quot;, &quot;valor&quot;: &quot;numero&quot;, &quot;unidad&quot;: &quot;h&quot;},
+    {&quot;funcion&quot;: &quot;bateria_ok&quot;, &quot;tipo&quot;: &quot;sensor&quot;, &quot;texto&quot;: &quot;batería suficiente&quot;, &quot;valor&quot;: &quot;si_no&quot;},
+    # acciones
+    {&quot;funcion&quot;: &quot;decir&quot;, &quot;tipo&quot;: &quot;accion&quot;, &quot;texto&quot;: &quot;decir&quot;,
+     &quot;args&quot;: [{&quot;nombre&quot;: &quot;mensaje&quot;, &quot;tipo&quot;: &quot;texto&quot;, &quot;defecto&quot;: &quot;¡Hola!&quot;}]},
+    {&quot;funcion&quot;: &quot;cuadrado&quot;, &quot;tipo&quot;: &quot;accion&quot;, &quot;texto&quot;: &quot;volar un cuadrado de&quot;,
+     &quot;args&quot;: [{&quot;nombre&quot;: &quot;lado&quot;, &quot;tipo&quot;: &quot;numero&quot;, &quot;defecto&quot;: 50, &quot;unidad&quot;: &quot;cm&quot;}]},
+]
+
+
+def azar(drone):
+    return random.randint(1, 6)
+
+
+def hora(drone):
+    return time.localtime().tm_hour
+
+
+def bateria_ok(drone):
+    return drone.get_battery() &gt; 30
+
+
+def decir(drone, mensaje):
+    drone.log(mensaje)                 # sale en la consola de DroneScript
+
+
+def cuadrado(drone, lado):
+    # usa los mismos movimientos que los bloques: respetan los límites y Detener / Land
+    for _ in range(4):
+        drone.move_forward(lado)
+        drone.rotate_clockwise(90)</code></pre>
+</section>
+
+<section>
+<h2>1. Agregar una librería que ya existe: detectar manos con MediaPipe</h2>
+<p>Tres bloques nuevos: <em>dedos levantados</em> (sensor, de 0 a 4 sin el pulgar), <em>ve una mano</em> (sensor sí/no) y <em>esperar dedos</em> (acción). Necesitas internet para instalar: hazlo antes de conectarte al Wi-Fi del dron, que deja el PC sin internet.</p>
+
+<h3>1.1 Escribir la extensión</h3>
+<p>Guarda este código en un archivo llamado exactamente <code>manos.py</code> (el nombre tiene que coincidir con el <code>id</code>).</p>
+<a class="dl" href="plantillas/manos.py" download>Descargar manos.py</a>
+<pre><code># ════════════════════════════════════════════════════════════════════════════
+#  manos.py — extensión de DroneScript: detectar manos y contar dedos
+# ════════════════════════════════════════════════════════════════════════════
+#
+#  Una extensión tiene SIEMPRE tres partes:
+#    1. EXTENSION: quién es, qué librerías usa y qué archivos necesita.
+#    2. BLOQUES:   los bloques nuevos que aparecerán en la paleta.
+#    3. Funciones: lo que hace cada bloque (una función de Python por bloque).
+#
+#  DroneScript LEE las partes 1 y 2 sin ejecutar nada, para mostrarte qué hace el
+#  archivo antes de que lo apruebes. Por eso EXTENSION y BLOQUES tienen que ser
+#  valores fijos: textos, números, listas y diccionarios, sin cálculos ni variables.
+
+
+# ── 1. Datos de la extensión ────────────────────────────────────────────────
+EXTENSION = {
+    # id: identificador único, en minúsculas y sin espacios. Debe coincidir con el
+    # nombre del archivo (manos.py → &quot;manos&quot;).
+    &quot;id&quot;: &quot;manos&quot;,
+
+    # nombre: lo que se ve en la paleta como título de la categoría nueva.
+    &quot;nombre&quot;: &quot;Manos (MediaPipe)&quot;,
+
+    &quot;descripcion&quot;: &quot;Ve una mano con la cámara y cuenta los dedos levantados.&quot;,
+    &quot;autor&quot;: &quot;Tu nombre&quot;,
+    &quot;version&quot;: &quot;1.0&quot;,
+
+    # color de la categoría en la paleta (formato #rrggbb).
+    &quot;color&quot;: &quot;#b4508a&quot;,
+
+    # librerias: los nombres EXACTOS como en pip (pip install mediapipe).
+    # DroneScript las instala cuando pulses «Instalar lo que falta».
+    &quot;librerias&quot;: [&quot;mediapipe&quot;],
+
+    # archivos: cosas que hay que descargar aparte. MediaPipe necesita un «modelo»:
+    # un archivo con lo que la red neuronal aprendió sobre cómo es una mano (~7 MB).
+    # DroneScript lo descarga a Documentos\DroneScript\extensiones\manos\
+    # y, como damos su sha256 (su «huella digital»), comprueba que llegó completo y
+    # que es exactamente ese archivo y no otro.
+    &quot;archivos&quot;: [{
+        &quot;nombre&quot;: &quot;mano.task&quot;,
+        &quot;url&quot;: &quot;https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task&quot;,
+        &quot;sha256&quot;: &quot;fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1&quot;,
+    }],
+}
+
+
+# ── 2. Los bloques nuevos ───────────────────────────────────────────────────
+#  tipo &quot;sensor&quot;: se usa dentro de las condiciones de «si», «while» y «esperar hasta».
+#                 «valor» dice qué devuelve: &quot;numero&quot;, &quot;si_no&quot; o &quot;texto&quot;.
+#  tipo &quot;accion&quot;: es un bloque que se pone en el programa, como «fly forward».
+#                 «args» son los campos que el alumno rellena (hasta 3).
+#  «funcion» es el nombre de la función de Python que se ejecuta (más abajo).
+BLOQUES = [
+    {&quot;funcion&quot;: &quot;dedos&quot;, &quot;tipo&quot;: &quot;sensor&quot;, &quot;texto&quot;: &quot;dedos levantados&quot;, &quot;valor&quot;: &quot;numero&quot;},
+    {&quot;funcion&quot;: &quot;ve_mano&quot;, &quot;tipo&quot;: &quot;sensor&quot;, &quot;texto&quot;: &quot;ve una mano&quot;, &quot;valor&quot;: &quot;si_no&quot;},
+    {&quot;funcion&quot;: &quot;esperar_dedos&quot;, &quot;tipo&quot;: &quot;accion&quot;, &quot;texto&quot;: &quot;esperar dedos&quot;,
+     &quot;args&quot;: [{&quot;nombre&quot;: &quot;cuántos&quot;, &quot;tipo&quot;: &quot;numero&quot;, &quot;defecto&quot;: 2}]},
+]
+
+
+# ── 3. El código ────────────────────────────────────────────────────────────
+#  Todo lo de aquí abajo SÍ se ejecuta, pero sólo cuando una misión usa uno de
+#  estos bloques, y sólo si el archivo es exactamente el que aprobaste.
+
+import time
+
+import cv2                    # OpenCV: ya viene con DroneScript (convierte colores)
+import mediapipe as mp        # la librería que agregamos
+from mediapipe.tasks.python import BaseOptions, vision
+
+from control.extensiones import carpeta   # dónde quedaron los archivos descargados
+
+# El detector de MediaPipe tarda ~1 s en prepararse: lo creamos UNA vez y lo guardamos
+# aquí para reutilizarlo en cada fotograma (si no, cada bloque tardaría 1 s).
+detector = None
+
+# Los 21 puntos que MediaPipe encuentra en una mano (los que usamos):
+#
+#        8   12  16  20      ← puntas de los dedos (índice, medio, anular, meñique)
+#        |   |   |   |
+#        6   10  14  18      ← nudillo del medio de cada dedo
+#         \  |   |  /
+#      4   \ |   | /
+#       \___\|___|/          ← 4 = punta del pulgar
+#            0               ← 0 = muñeca
+#
+# Cada punto tiene .x y .y entre 0 y 1 (fracción del ancho y del alto de la imagen).
+PUNTAS_Y_NUDILLOS = [(8, 6), (12, 10), (16, 14), (20, 18)]
+
+
+def _mano(drone):
+    &quot;&quot;&quot;Busca una mano en lo que ve la cámara ahora. Devuelve sus 21 puntos, o None.&quot;&quot;&quot;
+    global detector
+
+    # 1) Pedir el fotograma actual. Si la cámara está apagada, DroneScript la enciende.
+    #    Si el dron no tiene cámara (p. ej. el CoDrone EDU), llega None.
+    img = drone.get_frame()
+    if img is None:
+        return None
+
+    # 2) Crear el detector la primera vez, con el modelo que se descargó.
+    if detector is None:
+        opciones = vision.HandLandmarkerOptions(
+            base_options=BaseOptions(model_asset_path=str(carpeta(&quot;manos&quot;) / &quot;mano.task&quot;)),
+            num_hands=1)                     # con una mano basta, y es más rápido
+        detector = vision.HandLandmarker.create_from_options(opciones)
+
+    # 3) OpenCV guarda los colores como BGR (azul, verde, rojo) y MediaPipe los quiere
+    #    en RGB: si no se convierten, la piel se ve azulada y detecta peor.
+    rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    resultado = detector.detect(mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb))
+
+    # 4) hand_landmarks es una lista con los puntos de cada mano encontrada.
+    if not resultado.hand_landmarks:
+        return None
+    return resultado.hand_landmarks[0]
+
+
+def _lejos_de_la_muneca(p, a, b):
+    &quot;&quot;&quot;¿El punto a está más lejos de la muñeca que el punto b?
+
+    Un dedo levantado tiene la punta MÁS LEJOS de la muñeca que su nudillo; uno doblado,
+    más cerca. Comparamos distancias (y no sólo «más arriba») para que funcione aunque la
+    mano esté girada o de lado. Usamos la distancia al cuadrado: para comparar da lo mismo
+    y nos ahorramos la raíz.
+    &quot;&quot;&quot;
+    def dist2(i):
+        return (p[i].x - p[0].x) ** 2 + (p[i].y - p[0].y) ** 2
+    return dist2(a) &gt; dist2(b)
+
+
+def dedos(drone):
+    &quot;&quot;&quot;Sensor «dedos levantados»: 0 a 4 (el pulgar no se cuenta: de lado engaña mucho).&quot;&quot;&quot;
+    p = _mano(drone)
+    if p is None:
+        return 0
+    n = sum(_lejos_de_la_muneca(p, punta, nudillo) for punta, nudillo in PUNTAS_Y_NUDILLOS)
+    # drone.log escribe en la consola de DroneScript: muy útil para ver qué está
+    # detectando mientras pruebas. Bórralo cuando ya funcione (llena la consola).
+    drone.log(f&quot;manos: {n} dedos&quot;)
+    return n
+
+
+def ve_mano(drone):
+    &quot;&quot;&quot;Sensor «ve una mano»: True o False.&quot;&quot;&quot;
+    return _mano(drone) is not None
+
+
+def esperar_dedos(drone, cuantos):
+    &quot;&quot;&quot;Acción «esperar dedos»: espera hasta ver ese número de dedos (como mucho 20 s).
+
+    drone.wait() es importante: además de esperar, revisa si alguien pulsó Detener,
+    Land o Emergency. Un time.sleep() normal NO lo haría y la misión no se podría parar.
+    &quot;&quot;&quot;
+    limite = time.monotonic() + 20
+    while time.monotonic() &lt; limite:
+        if dedos(drone) == int(cuantos):
+            drone.log(f&quot;manos: vi {int(cuantos)} dedos&quot;)
+            return
+        drone.wait(0.1)
+    drone.log(f&quot;manos: no vi {int(cuantos)} dedos en 20 s; sigo&quot;, &quot;warn&quot;)</code></pre>
+
+<h3>1.2 Importarla e instalar la librería</h3>
+<ol>
+<li>En la paleta, al final: <strong>Extensiones y librerías…</strong> → <strong>+ Importar extensión</strong> → elige <code>manos.py</code>.</li>
+<li>Revisa los bloques, la librería (<code>mediapipe</code>), la descarga (<code>mano.task</code>) y la huella. Pulsa <strong>Importar</strong>.</li>
+<li>Aparece «Falta: mediapipe, mano.task». Pulsa <strong>Instalar lo que falta</strong>: pip descarga MediaPipe (1 a 3 minutos) y la app descarga el modelo y comprueba su huella. El progreso sale en la consola.</li>
+<li>Cuando diga <strong>Lista para usar</strong>, en la paleta aparece la categoría <strong>Manos (MediaPipe)</strong>.</li>
+</ol>
+<p>Si sólo quieres instalar una librería, sin extensión: escribe su nombre en la casilla «nombre en pip» de esa ventana y pulsa <strong>Instalar librería</strong>.</p>
+
+<h3>1.3 Probar en tierra</h3>
+<ol>
+<li>Conecta el PC al Wi-Fi del Tello → <strong>Seleccionar dron</strong> → <strong>DJI Tello</strong> → <strong>Conectar</strong>.</li>
+<li>Con el dron apoyado en la mesa, arma: <code>repeat 30</code> → dentro, <code>si [dedos levantados] [&gt;] [0]</code> → dentro, <code>wait 0.5</code>. Los sensores de la extensión están al final de la lista de la condición.</li>
+<li><strong>Ejecutar</strong> y pon la mano a 40–100 cm de la cámara, con buena luz. En la consola verás «manos: 2 dedos», «manos: 4 dedos»…</li>
+</ol>
+
+<h3>1.4 Volar con gestos</h3>
+<pre><code>takeoff
+esperar dedos  [1]                     (espera a que muestres 1 dedo)
+fly up  30
+esperar dedos  [2]
+rotate CW  90
+while  [dedos levantados] [≠] [4]      (hasta que muestres la mano abierta)
+    si  [dedos levantados] [=] [1]
+        fly forward  30
+    wait  0.5
+land</code></pre>
+<p>Ten a mano <strong>Land (L)</strong> y <strong>Emergency (E)</strong>: funcionan aunque la misión esté esperando una mano. El vídeo del Tello llega con unos 0,3 s de retraso: haz los gestos despacio.</p>
+</section>
+
+<section>
+<h2>2. Crear tu propia extensión: Rutinas de vuelo</h2>
+<p>Una extensión escrita desde cero, sin librerías externas:</p>
+<table>
+<tr><th>Bloque</th><th>Tipo</th><th>Qué hace</th></tr>
+<tr><td>polígono [lados] de [cm]</td><td>acción</td><td>Vuela un polígono regular: triángulo, cuadrado, hexágono…</td></tr>
+<tr><td>buscar ArUco [id]</td><td>acción</td><td>Gira de 30 en 30° hasta ver el marcador (como mucho una vuelta).</td></tr>
+<tr><td>anotar [nota]</td><td>acción</td><td>Guarda hora, batería, altura y orientación en una tabla CSV que se abre con Excel.</td></tr>
+<tr><td>segundos de misión</td><td>sensor</td><td>Cuántos segundos lleva la misión.</td></tr>
+</table>
+
+<h3>2.1 Dónde guardarla</h3>
+<p>En una carpeta tuya, por ejemplo <code>Documentos\mis_extensiones\</code>. DroneScript hace una copia al importarla; tu archivo es el que editas y del que guardas respaldo.</p>
+
+<h3>2.2 Escribir la extensión</h3>
+<p>Guarda este código como <code>rutinas.py</code>.</p>
+<a class="dl" href="plantillas/rutinas.py" download>Descargar rutinas.py</a>
+<pre><code># ════════════════════════════════════════════════════════════════════════════
+#  rutinas.py — extensión propia de DroneScript: rutinas de vuelo
+# ════════════════════════════════════════════════════════════════════════════
+#
+#  Bloques nuevos:
+#    · polígono      (acción)  vuela un polígono regular de N lados
+#    · buscar ArUco  (acción)  gira poco a poco hasta ver un marcador
+#    · anotar        (acción)  guarda la telemetría en una tabla (CSV, se abre con Excel)
+#    · segundos de misión (sensor) cuánto tiempo lleva la misión
+#
+#  No necesita instalar nada: sólo usa lo que ya trae Python y la API de DroneScript
+#  (el objeto `drone`, el mismo de las misiones).
+
+
+# ── 1. Datos de la extensión (valores fijos: DroneScript los lee sin ejecutar) ──
+EXTENSION = {
+    &quot;id&quot;: &quot;rutinas&quot;,                 # = nombre del archivo (rutinas.py), en minúsculas
+    &quot;nombre&quot;: &quot;Rutinas de vuelo&quot;,    # título de la categoría en la paleta
+    &quot;descripcion&quot;: &quot;Polígonos, búsqueda de ArUco y registro de vuelo en CSV.&quot;,
+    &quot;autor&quot;: &quot;Tu nombre&quot;,
+    &quot;version&quot;: &quot;1.0&quot;,
+    &quot;color&quot;: &quot;#2d7d46&quot;,
+    &quot;librerias&quot;: [],                 # nada que instalar con pip
+    &quot;archivos&quot;: [],                  # nada que descargar
+}
+
+
+# ── 2. Bloques nuevos ───────────────────────────────────────────────────────
+#  «args»: los campos que se rellenan en el bloque (máximo 3).
+#    tipo &quot;numero&quot;: casilla de número (admite cuentas con variables, como vueltas * 10)
+#    tipo &quot;texto&quot;:  casilla de texto
+#    «unidad» se muestra detrás de la casilla.
+BLOQUES = [
+    {&quot;funcion&quot;: &quot;poligono&quot;, &quot;tipo&quot;: &quot;accion&quot;, &quot;texto&quot;: &quot;polígono&quot;,
+     &quot;args&quot;: [{&quot;nombre&quot;: &quot;lados&quot;, &quot;tipo&quot;: &quot;numero&quot;, &quot;defecto&quot;: 4},
+              {&quot;nombre&quot;: &quot;de&quot;, &quot;tipo&quot;: &quot;numero&quot;, &quot;defecto&quot;: 50, &quot;unidad&quot;: &quot;cm&quot;}]},
+    {&quot;funcion&quot;: &quot;buscar_aruco&quot;, &quot;tipo&quot;: &quot;accion&quot;, &quot;texto&quot;: &quot;buscar ArUco&quot;,
+     &quot;args&quot;: [{&quot;nombre&quot;: &quot;id&quot;, &quot;tipo&quot;: &quot;numero&quot;, &quot;defecto&quot;: 100}]},
+    {&quot;funcion&quot;: &quot;anotar&quot;, &quot;tipo&quot;: &quot;accion&quot;, &quot;texto&quot;: &quot;anotar&quot;,
+     &quot;args&quot;: [{&quot;nombre&quot;: &quot;nota&quot;, &quot;tipo&quot;: &quot;texto&quot;, &quot;defecto&quot;: &quot;punto 1&quot;}]},
+    {&quot;funcion&quot;: &quot;segundos&quot;, &quot;tipo&quot;: &quot;sensor&quot;, &quot;texto&quot;: &quot;segundos de misión&quot;, &quot;valor&quot;: &quot;numero&quot;, &quot;unidad&quot;: &quot;s&quot;},
+]
+
+
+# ── 3. El código ────────────────────────────────────────────────────────────
+import csv
+import time
+from datetime import datetime
+
+from control.extensiones import carpeta   # carpeta propia de la extensión: extensiones\rutinas\
+
+# Este archivo se ejecuta al empezar la misión (cuando el código generado hace
+# cargar(&quot;rutinas&quot;)), así que la hora de ahora es «el inicio de la misión».
+INICIO = time.monotonic()
+ARCHIVO = None   # la tabla de esta misión; se crea con la primera nota
+
+
+def poligono(drone, lados, lado):
+    &quot;&quot;&quot;Vuela un polígono regular: «lados» tramos de «lado» cm, girando 360/lados grados.
+
+    Usa los mismos movimientos que los bloques, así que se respetan los límites del panel
+    (velocidad, altura) y Detener funciona en cualquier momento.
+    &quot;&quot;&quot;
+    lados = int(lados)
+    if lados &lt; 3:
+        drone.log(&quot;polígono: hacen falta al menos 3 lados&quot;, &quot;warn&quot;)
+        return
+    giro = 360 / lados                     # triángulo 120°, cuadrado 90°, hexágono 60°…
+    drone.log(f&quot;polígono de {lados} lados de {lado} cm (giros de {giro:.0f}°)&quot;)
+    for _ in range(lados):
+        drone.move_forward(lado)
+        drone.rotate_clockwise(giro)
+
+
+def buscar_aruco(drone, marcador):
+    &quot;&quot;&quot;Gira de 30 en 30 grados hasta ver el ArUco (como mucho una vuelta completa).
+
+    Después de cada giro espera medio segundo: la imagen del dron llega con algo de retraso
+    y sin esa pausa miraría una foto de antes del giro.
+    &quot;&quot;&quot;
+    marcador = int(marcador)
+    for paso in range(12):                 # 12 × 30° = 360°
+        if drone.sees_aruco(marcador):
+            drone.log(f&quot;buscar ArUco: encontré el {marcador} tras girar {paso * 30}°&quot;, &quot;success&quot;)
+            return
+        drone.rotate_clockwise(30)
+        drone.wait(0.5)                    # wait, no time.sleep: así Detener la corta
+    drone.log(f&quot;buscar ArUco: di una vuelta y no vi el {marcador}&quot;, &quot;warn&quot;)
+
+
+def anotar(drone, nota):
+    &quot;&quot;&quot;Añade una fila a la tabla de la misión: hora, segundos, batería, altura, yaw y la nota.
+
+    La tabla queda en Documentos\\DroneScript\\extensiones\\rutinas\\vuelo_&lt;fecha&gt;.csv.
+    El CSV usa «;», que es lo que Excel en español espera para separar columnas.
+    &quot;&quot;&quot;
+    global ARCHIVO
+    nueva = ARCHIVO is None
+    if nueva:
+        carpeta(&quot;rutinas&quot;).mkdir(parents=True, exist_ok=True)
+        ARCHIVO = carpeta(&quot;rutinas&quot;) / f&quot;vuelo_{datetime.now():%Y%m%d_%H%M%S}.csv&quot;
+    fila = [datetime.now().strftime(&quot;%H:%M:%S&quot;), segundos(drone), drone.get_battery(),
+            drone.get_height(), drone.get_yaw(), nota]
+    # «utf-8-sig» para que Excel muestre bien los acentos; newline=&quot;&quot; lo pide el módulo csv
+    with open(ARCHIVO, &quot;a&quot;, newline=&quot;&quot;, encoding=&quot;utf-8-sig&quot;) as f:
+        tabla = csv.writer(f, delimiter=&quot;;&quot;)
+        if nueva:
+            tabla.writerow([&quot;hora&quot;, &quot;segundos&quot;, &quot;bateria_%&quot;, &quot;altura_cm&quot;, &quot;yaw_grados&quot;, &quot;nota&quot;])
+        tabla.writerow(fila)
+    drone.log(f&quot;anotado: {nota} → {ARCHIVO.name}&quot;)
+
+
+def segundos(drone):
+    &quot;&quot;&quot;Sensor: segundos (enteros) desde que empezó la misión.&quot;&quot;&quot;
+    return int(time.monotonic() - INICIO)</code></pre>
+<ul>
+<li>El nombre de la casilla y el del parámetro no tienen que coincidir: importa el <strong>orden</strong>. La primera casilla es el primer valor después de <code>drone</code>.</li>
+<li>Las casillas de número llegan como número (por eso <code>int(lados)</code>); las de texto, como texto.</li>
+<li><code>INICIO</code> y <code>ARCHIVO</code> están fuera de las funciones: se crean una vez, al empezar la misión, y todas las funciones las comparten.</li>
+<li>Los movimientos pasan por <code>drone</code>: respetan la altura máxima, la velocidad y Detener, igual que los bloques normales.</li>
+</ul>
+
+<h3>2.3 Importarla</h3>
+<p><strong>Extensiones y librerías…</strong> → <strong>+ Importar extensión</strong> → <code>rutinas.py</code> → <strong>Importar</strong>. Como no necesita nada, queda <strong>Lista para usar</strong> y aparece la categoría <strong>Rutinas de vuelo</strong>.</p>
+
+<h3>2.4 Probar en el simulador</h3>
+<pre><code>takeoff
+anotar        [despegue]
+polígono      [3] de [50] cm
+buscar ArUco  [100]
+anotar        [frente al ArUco]
+land</code></pre>
+<p>Con <strong>Simulador</strong> conectado, pulsa <strong>Ejecutar</strong>. El simulador tiene un ArUco 100 en la pared del frente. Después abre la tabla en <code>Documentos\DroneScript\extensiones\rutinas\</code>. Para probar el sensor: <code>while [segundos de misión] [&lt;] [20]</code> con un <code>polígono [4] de [40]</code> dentro.</p>
+
+<h3>2.5 Probar con el Tello</h3>
+<p>Pega un ArUco 5x5 ID 100 de 20 cm en una pared, a 1 m de altura, y repite el programa en un espacio libre de al menos 2 × 2 m. Empieza con un polígono pequeño (<code>[3] de [40]</code>).</p>
+
+<h3>2.6 Cambiar tu extensión</h3>
+<ol>
+<li>Edita <strong>tu archivo original</strong> y sube <code>"version"</code> (por ejemplo a <code>"1.1"</code>). Ejemplo: para que <code>buscar ArUco</code> también se acerque al encontrarlo, añade <code>drone.approach_aruco(marcador, 80)</code> justo después del <code>drone.log(...)</code> de «encontré».</li>
+<li>Vuelve a importarlo: la app avisa de que reemplazará la anterior, que queda en <code>extensiones\papelera\</code>.</li>
+</ol>
+<p>No edites la copia de <code>Documentos\DroneScript\extensiones\</code>: su huella dejaría de coincidir y la app la marcaría «Sin aprobar» hasta que la revises de nuevo.</p>
+</section>
+
+</main>
+<footer>DroneScript · programación por bloques para DJI Tello, CoDrone EDU, Parrot Anafi y VEX AIR</footer>
+</body>
+</html>

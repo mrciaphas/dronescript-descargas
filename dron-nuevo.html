@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agregar un dron nuevo — DroneScript</title>
+<meta name="description" content="Cómo agregar un dron nuevo a DroneScript con un modelo importado.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='2' y='2' width='60' height='60' rx='13' fill='%230d1117'/%3E%3Cg stroke='%232f81f7' stroke-width='4.4'%3E%3Cpath d='M32 32 15 15M32 32 49 15M32 32 15 49M32 32 49 49'/%3E%3Cg fill='%23161b22' stroke-width='2.2'%3E%3Ccircle cx='15' cy='15' r='9.4'/%3E%3Ccircle cx='49' cy='15' r='9.4'/%3E%3Ccircle cx='15' cy='49' r='9.4'/%3E%3Ccircle cx='49' cy='49' r='9.4'/%3E%3C/g%3E%3C/g%3E%3Crect x='24' y='24' width='16' height='16' fill='%232f81f7'/%3E%3C/svg%3E">
+<style>
+:root {
+  --bg: #0d1117; --panel: #161b22; --card: #1c2128; --border: #30363d;
+  --pri: #e6edf3; --sec: #8b949e; --accent: #2f81f7; --teal: #3fb950; --yellow: #d29922;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body {
+  margin: 0; background: var(--bg); color: var(--pri);
+  font: 16px/1.6 -apple-system, "Segoe UI", system-ui, Roboto, sans-serif;
+}
+.wrap { max-width: 860px; margin: 0 auto; padding: 0 16px; }
+header { padding: 64px 0 40px; text-align: center; border-bottom: 1px solid var(--border);
+  background: radial-gradient(ellipse at top, rgba(47,129,247,.14), transparent 65%); }
+.logo { width: 88px; height: 88px; }
+h1 { margin: 12px 0 4px; font-size: 40px; letter-spacing: .06em; color: var(--accent); }
+.tag { margin: 0 auto 28px; max-width: 560px; color: var(--sec); font-size: 18px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px;
+  background: #238636; border: 1px solid #2ea043; border-radius: 8px;
+  color: #fff; font-size: 18px; font-weight: 600; text-decoration: none;
+}
+.btn:hover { background: #2ea043; }
+.btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.btn svg { width: 22px; height: 22px; }
+.meta { margin-top: 12px; color: var(--sec); font-size: 14px; }
+.meta a { color: var(--sec); }
+main { padding: 40px 0 24px; }
+section { margin-bottom: 40px; }
+h2 { font-size: 22px; margin: 0 0 14px; }
+p, li { color: #c9d1d9; }
+a { color: var(--accent); }
+.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+.card h3 { margin: 0 0 6px; font-size: 16px; }
+.card p { margin: 0; font-size: 15px; color: var(--sec); }
+.note { background: rgba(210,153,34,.1); border: 1px solid rgba(210,153,34,.45); border-left-width: 4px;
+  border-radius: 8px; padding: 16px 20px; }
+.note h2 { color: var(--yellow); }
+ol { padding-left: 22px; margin: 0; }
+li { margin-bottom: 8px; }
+li::marker { color: var(--sec); }
+kbd, code { background: var(--card); border: 1px solid var(--border); border-radius: 5px;
+  padding: 1px 6px; font: 14px Consolas, "SF Mono", monospace; color: var(--pri); }
+footer { border-top: 1px solid var(--border); padding: 24px 0 40px; color: var(--sec); font-size: 14px; text-align: center; }
+@media (max-width: 600px) {
+  header { padding: 44px 0 32px; }
+  h1 { font-size: 32px; }
+  .btn { width: 100%; justify-content: center; }
+  .grid { grid-template-columns: 1fr; }
+}
+
+nav { padding: 18px 0; border-bottom: 1px solid var(--border); }
+nav a { text-decoration: none; }
+h1.page { font-size: 30px; letter-spacing: 0; color: var(--pri); margin: 32px 0 6px; }
+.lead { color: var(--sec); font-size: 17px; margin: 0 0 8px; }
+h3 { font-size: 17px; margin: 22px 0 8px; }
+pre { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px;
+  overflow-x: auto; font: 13px/1.5 Consolas, "SF Mono", monospace; color: var(--pri); margin: 10px 0 16px; }
+pre code { background: none; border: 0; padding: 0; font: inherit; }
+table { border-collapse: collapse; width: 100%; margin: 10px 0 16px; font-size: 15px; }
+th, td { border: 1px solid var(--border); padding: 7px 10px; text-align: left; vertical-align: top; color: #c9d1d9; }
+th { background: var(--panel); color: var(--pri); }
+.dl { display: inline-block; margin: 4px 0 6px; font-size: 15px; }
+ul { padding-left: 22px; } ul li { margin-bottom: 6px; }
+</style>
+</head>
+<body>
+<nav><div class="wrap"><a href="./">&larr; DroneScript</a></div></nav>
+<main class="wrap">
+
+<h1 class="page">Agregar un dron nuevo</h1>
+<p class="lead">Si tu dron no está en la lista, puedes crear su <strong>modelo</strong>: un archivo <code>.py</code> que le explica a DroneScript cómo hablar con él.</p>
+<p>Necesitas <strong>DroneScript 1.5 o más nuevo</strong> y el manual o SDK de tu dron (qué órdenes acepta y por dónde: Wi-Fi, USB, Bluetooth).</p>
+
+<section>
+<h2>La idea</h2>
+<p>DroneScript ya se encarga de los bloques, los límites del panel (altura, velocidad, hover), las teclas de seguridad y el aterrizaje automático. El modelo sólo traduce órdenes simples al idioma de tu dron. Tiene dos partes:</p>
+<table>
+<tr><th>Parte</th><th>Qué es</th></tr>
+<tr><td><code>MODELO = {...}</code></td><td><code>id</code> (minúsculas, números y _), <code>nombre</code> que se ve en la lista, <code>clase</code> que lo maneja, y autor, versión y descripción.</td></tr>
+<tr><td><code>class MiDron(BaseDriver)</code></td><td>La clase que habla con el dron. Hereda de <code>BaseDriver</code> e implementa sus métodos.</td></tr>
+</table>
+<p>Métodos que el modelo <strong>tiene que</strong> definir (sin ellos, la app no lo importa):</p>
+<table>
+<tr><th>Método</th><th>Qué hace</th></tr>
+<tr><td><code>connect()</code> / <code>close()</code></td><td>Abrir y cerrar la conexión. Si el dron no responde, lanzar <code>DroneError("qué revisar")</code>.</td></tr>
+<tr><td><code>telemetry()</code></td><td>Devolver <code>{"bat", "h", "tof", "pitch", "roll", "yaw", "fresh"}</code> (%, cm, grados). Lo que no tenga, <code>None</code>. Se llama 4 veces por segundo.</td></tr>
+<tr><td><code>takeoff()</code> / <code>land()</code></td><td>Despegar y aterrizar, esperando a que termine.</td></tr>
+<tr><td><code>move(direction, cm)</code></td><td><code>direction</code>: forward, back, left, right, up o down. DroneScript ya parte las distancias según <code>min_move</code> y <code>max_move</code>.</td></tr>
+<tr><td><code>rotate(degrees)</code></td><td>Grados positivos: sentido horario.</td></tr>
+<tr><td><code>set_speed(cm_s)</code></td><td>Fijar la velocidad y devolver la que se aplicó.</td></tr>
+<tr><td><code>emergency()</code></td><td>Apagar los motores <strong>ya</strong>. Se llama desde otro hilo: tiene que ser inmediato.</td></tr>
+<tr><td><code>safe_land()</code></td><td>Interrumpir lo que esté haciendo y aterrizar. Devuelve <code>True</code> si se confirmó.</td></tr>
+</table>
+<p>Lo que el dron tiene se declara con atributos: <code>has_camera</code>, <code>has_led</code>, <code>has_buzzer</code>, <code>has_front</code>, <code>has_color</code>, <code>has_gimbal</code>, <code>supports_flip</code>. Los bloques de lo que no tenga se marcan «no soportado». Opcionales: <code>camera_on</code>, <code>take_photo</code>, <code>set_led</code>, <code>beep</code>, <code>flip</code>, <code>set_gimbal</code>.</p>
+<p><strong>Dos reglas importantes:</strong></p>
+<ul>
+<li>Para esperar, usa <code>self.sleep(segundos)</code>, o revisa <code>self.check_abort()</code> en tus bucles: así Detener, Land y Emergency cortan la espera.</li>
+<li>Toda espera de una respuesta tiene que tener un tiempo límite: si el dron no contesta, se lanza un error en vez de quedarse colgado.</li>
+</ul>
+<p>Puedes usar las librerías de Python (socket, struct, threading, json…) y las que trae DroneScript: numpy, cv2 (OpenCV), av (vídeo) y serial (puerto serie).</p>
+</section>
+
+<section>
+<h2>Plantilla 1: dron virtual</h2>
+<p>Funciona tal como está: un dron que sólo escribe en la consola lo que haría. Sirve para probar el importador y ver qué hace cada método. También la guarda la app: <strong>Seleccionar dron → + Importar modelo de dron → Guardar plantilla</strong>.</p>
+<a class="dl" href="plantillas/plantilla_modelo_dron.py" download>Descargar plantilla_modelo_dron.py</a>
+<pre><code>&quot;&quot;&quot;Plantilla de modelo de dron para DroneScript.
+
+Cópiala, cambia MODELO y la clase, e impórtala con «+ Importar modelo de dron» en la
+ventana de elegir dron. Tal como está funciona: es un dron virtual que sólo escribe en
+la consola lo que haría, para que pruebes el importador y tus misiones.
+
+Cómo funciona un modelo:
+- MODELO dice cómo se llama y qué clase usar. DroneScript lo lee SIN ejecutar el archivo.
+- La clase hereda de BaseDriver (control/drivers/base.py) e implementa sus métodos.
+  DroneScript aplica antes los límites del panel (altura, velocidad, hover) y las
+  teclas de seguridad; el modelo sólo tiene que hablar con el dron.
+- El código se ejecuta al pulsar «Conectar». Sólo puede usar las librerías que trae
+  DroneScript: las de Python (socket, struct, threading, json…) y numpy, cv2 (OpenCV),
+  av (vídeo H.264) y serial (puerto serie).
+
+Ejemplos reales para copiar ideas: control/drivers/tello.py (UDP con texto),
+anafi.py (UDP binario con acuses) y codrone.py (puerto serie con una librería).
+&quot;&quot;&quot;
+
+import time
+
+from control.drivers.base import BaseDriver, DroneError, DroneRejected
+
+MODELO = {
+    &quot;id&quot;: &quot;dron_plantilla&quot;,           # minúsculas, números y _ ; es lo que va en Drone(&quot;…&quot;)
+    &quot;nombre&quot;: &quot;Dron de plantilla&quot;,    # lo que se ve en la lista de drones
+    &quot;clase&quot;: &quot;DronPlantilla&quot;,         # la clase de abajo
+    &quot;descripcion&quot;: &quot;Dron virtual de ejemplo: escribe en la consola lo que haría.&quot;,
+    &quot;autor&quot;: &quot;DroneScript&quot;,
+    &quot;version&quot;: &quot;1.0&quot;,
+}
+
+
+class DronPlantilla(BaseDriver):
+    name = &quot;Dron de plantilla&quot;
+    min_move = 20        # cm mínimos y máximos por orden de desplazamiento
+    max_move = 500
+    max_rotate = 360
+    min_speed = 10       # cm/s
+    max_speed = 100
+    # Qué tiene el dron. Los bloques de lo que no tenga se marcan «se omitirá».
+    supports_flip = False
+    has_tof = False
+    has_camera = False
+    has_gimbal = False
+    has_front = False
+    has_color = False
+    has_led = False
+    has_buzzer = False
+
+    def __init__(self):
+        super().__init__()
+        self.speed = 30
+        self._h = 0          # cm
+        self._yaw = 0        # °
+        self._bat = 100      # %
+
+    # ── conexión ──────────────────────────────────────────────────
+    def connect(self):
+        # Un dron real: abrir el socket o el puerto serie y comprobar que responde.
+        # Si no responde, lanzar DroneError con un mensaje que diga qué revisar.
+        self.connected = True
+        self.log(&quot;success&quot;, f&quot;Conectado a {self.name} (virtual)&quot;)
+
+    def close(self):
+        self.connected = False
+
+    # ── telemetría ────────────────────────────────────────────────
+    def telemetry(self):
+        # «fresh» = los datos son recientes. Si no hay telemetría, DroneScript avisa
+        # y no puede aplicar los límites de altura.
+        return {&quot;bat&quot;: self._bat, &quot;h&quot;: self._h, &quot;tof&quot;: self._h, &quot;pitch&quot;: 0, &quot;roll&quot;: 0,
+                &quot;yaw&quot;: self._yaw, &quot;fresh&quot;: self.connected}
+
+    # ── vuelo ─────────────────────────────────────────────────────
+    # Usa self.sleep() para esperar: se corta al pulsar Detener / Land / Emergency.
+    def takeoff(self):
+        self.flying = True   # pesimista: si se pierde la respuesta, quizá sí despegó
+        self.log(&quot;info&quot;, &quot;(plantilla) despegando…&quot;)
+        self.sleep(1.0)
+        self._h = 80
+
+    def land(self):
+        self.log(&quot;info&quot;, &quot;(plantilla) aterrizando…&quot;)
+        self.sleep(1.0)
+        self._h = 0
+        self.flying = False
+
+    def move(self, direction, cm):
+        # direction: forward, back, left, right, up, down
+        if not self.flying:
+            raise DroneRejected(f&quot;&#x27;{direction} {cm}&#x27;: el dron está en tierra&quot;)
+        self.sleep(cm / max(self.speed, 1))
+        if direction == &quot;up&quot;:
+            self._h += cm
+        elif direction == &quot;down&quot;:
+            self._h = max(0, self._h - cm)
+
+    def rotate(self, degrees):
+        # grados positivos = sentido horario
+        self.sleep(abs(degrees) / 90)
+        self._yaw = int((self._yaw + degrees + 180) % 360 - 180)
+
+    def set_speed(self, cm_s):
+        self.speed = int(min(self.max_speed, max(self.min_speed, cm_s)))
+        return self.speed
+
+    # ── seguridad (se llaman desde otro hilo: que sean rápidos) ───
+    def emergency(self):
+        self.abort_event.set()   # corta la espera en curso de la misión
+        self.flying = False      # un dron real: apagar motores YA
+        self._h = 0
+        self.log(&quot;error&quot;, &quot;(plantilla) motores apagados&quot;)
+
+    def safe_land(self):
+        self.abort_event.set()
+        if not self.flying:
+            return True
+        time.sleep(1.0)          # aquí no se usa self.sleep: la misión ya se abortó
+        self._h = 0
+        self.flying = False
+        return True              # True si se confirmó el aterrizaje
+
+    # Opcionales (BaseDriver ya responde «no disponible»): camera_on, take_photo,
+    # start_video, stop_video, set_gimbal, set_led, beep, flip, query.
+
+
+if __name__ == &quot;__main__&quot;:
+    raise DroneError(&quot;Esto es un modelo para importar en DroneScript, no un programa&quot;)</code></pre>
+</section>
+
+<section>
+<h2>Plantilla 2: dron por Wi-Fi con órdenes de texto</h2>
+<p>El caso más común en drones educativos (el DJI Tello y sus clones): el PC manda texto como <code>takeoff</code> o <code>forward 50</code> por UDP a la IP del dron y el dron responde <code>ok</code>. Cambia <code>IP</code>, <code>PUERTO</code> y las órdenes por las de tu dron.</p>
+<a class="dl" href="plantillas/plantilla_dron_udp.py" download>Descargar plantilla_dron_udp.py</a>
+<pre><code>&quot;&quot;&quot;Modelo de dron para DroneScript: un dron por Wi-Fi que recibe órdenes de texto por UDP.
+
+Muchos drones educativos funcionan así (el DJI Tello y sus clones): el PC manda una orden de
+texto, como &quot;takeoff&quot; o &quot;forward 50&quot;, a la IP y el puerto del dron, y el dron responde &quot;ok&quot; o
+&quot;error&quot;. Cambia IP, PUERTO y las órdenes por las que use tu dron (vienen en su manual o SDK).
+&quot;&quot;&quot;
+
+import socket
+import threading
+import time
+
+from control.drivers.base import BaseDriver, DroneError, DroneRejected
+
+MODELO = {
+    &quot;id&quot;: &quot;dron_udp&quot;,                 # minúsculas, números y _ ; único
+    &quot;nombre&quot;: &quot;Mi dron por Wi-Fi&quot;,    # lo que se ve en la lista de drones
+    &quot;clase&quot;: &quot;DronUDP&quot;,               # la clase de abajo
+    &quot;descripcion&quot;: &quot;Dron que recibe órdenes de texto por UDP.&quot;,
+    &quot;autor&quot;: &quot;Tu nombre&quot;,
+    &quot;version&quot;: &quot;1.0&quot;,
+}
+
+IP = &quot;192.168.10.1&quot;     # la IP del dron cuando el PC está conectado a su Wi-Fi
+PUERTO = 8889           # el puerto UDP donde escucha las órdenes
+
+
+class DronUDP(BaseDriver):
+    name = &quot;Mi dron por Wi-Fi&quot;
+    min_move = 20        # cm mínimos y máximos que acepta en una orden de movimiento
+    max_move = 500
+    max_rotate = 360
+    min_speed = 10       # cm/s
+    max_speed = 100
+    supports_flip = False   # lo que no tenga: sus bloques se marcan «no soportado»
+    has_tof = False
+    has_camera = False
+
+    def __init__(self):
+        super().__init__()
+        self.speed = 30
+        self.sock = None
+        self.lock = threading.Lock()   # una orden a la vez: la telemetría usa el mismo socket
+        self.bat = None
+        self.bat_time = 0.0
+
+    # ── conexión ──────────────────────────────────────────────────
+    def connect(self):
+        self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        self.sock.settimeout(0.2)   # recvfrom espera como mucho 0,2 s y vuelve a mirar si hay que abortar
+        try:
+            reply = self.send(&quot;command&quot;, timeout=3, abortable=False)   # pone el dron en modo SDK
+        except DroneError:
+            reply = None
+        if reply != &quot;ok&quot;:
+            self.close()
+            raise DroneError(f&quot;El dron no responde en {IP}: enciéndelo y conecta el PC a su Wi-Fi&quot;)
+        self.connected = True
+        self.log(&quot;success&quot;, f&quot;Conectado a {self.name}&quot;)
+
+    def close(self):
+        self.connected = False
+        if self.sock:
+            self.sock.close()
+            self.sock = None
+
+    # ── enviar órdenes ────────────────────────────────────────────
+    def send(self, cmd, timeout=7.0, abortable=True):
+        &quot;&quot;&quot;Manda una orden y devuelve la respuesta del dron (texto).&quot;&quot;&quot;
+        with self.lock:
+            return self._send(cmd, timeout, abortable)
+
+    def _send(self, cmd, timeout, abortable):
+        self.sock.setblocking(False)   # tirar respuestas atrasadas de órdenes anteriores
+        try:
+            while self.sock.recv(1024):
+                pass
+        except OSError:
+            pass
+        self.sock.settimeout(0.2)
+        self.sock.sendto(cmd.encode(), (IP, PUERTO))
+        limit = time.monotonic() + timeout
+        while time.monotonic() &lt; limit:
+            if abortable:
+                self.check_abort()   # Detener / Land / Emergency cortan la espera aquí
+            try:
+                data, _ = self.sock.recvfrom(1024)
+                return data.decode(errors=&quot;replace&quot;).strip()
+            except socket.timeout:
+                pass
+        raise DroneError(f&quot;&#x27;{cmd}&#x27;: el dron no respondió en {timeout:.0f} s&quot;)
+
+    def order(self, cmd, timeout=7.0):
+        &quot;&quot;&quot;Una orden que tiene que responder &quot;ok&quot;; si no, es un error.&quot;&quot;&quot;
+        reply = self.send(cmd, timeout)
+        if reply.lower() != &quot;ok&quot;:
+            raise DroneRejected(f&quot;&#x27;{cmd}&#x27; → {reply}&quot;)
+
+    # ── telemetría ────────────────────────────────────────────────
+    def telemetry(self):
+        # DroneScript la pide 4 veces por segundo. La batería se pregunta como mucho cada 2 s,
+        # y sólo si no hay una orden en curso (si no, las respuestas se mezclarían).
+        if self.connected and time.monotonic() - self.bat_time &gt; 2 and self.lock.acquire(blocking=False):
+            try:
+                self.bat = int(float(self._send(&quot;battery?&quot;, 2, abortable=False)))
+                self.bat_time = time.monotonic()
+            except (DroneError, ValueError):
+                pass
+            finally:
+                self.lock.release()
+        # Sin altura (None), DroneScript avisa de que no puede aplicar los límites de altura.
+        # Si tu dron la da, pregúntala igual que la batería (en el Tello: &quot;height?&quot;).
+        return {&quot;bat&quot;: self.bat, &quot;h&quot;: None, &quot;tof&quot;: None, &quot;pitch&quot;: None, &quot;roll&quot;: None, &quot;yaw&quot;: None,
+                &quot;fresh&quot;: time.monotonic() - self.bat_time &lt; 5}
+
+    # ── vuelo ─────────────────────────────────────────────────────
+    def takeoff(self):
+        self.flying = True   # pesimista: si se pierde la respuesta, quizá sí despegó
+        try:
+            self.order(&quot;takeoff&quot;, timeout=20)
+        except DroneRejected:
+            self.flying = False
+            raise
+
+    def land(self):
+        self.order(&quot;land&quot;, timeout=20)
+        self.flying = False
+
+    def move(self, direction, cm):
+        # direction: forward, back, left, right, up, down (como las órdenes del Tello)
+        self.order(f&quot;{direction} {int(cm)}&quot;, timeout=cm / max(self.speed, 1) + 7)
+
+    def rotate(self, degrees):
+        # grados positivos = sentido horario
+        sentido = &quot;cw&quot; if degrees &gt;= 0 else &quot;ccw&quot;
+        self.order(f&quot;{sentido} {int(round(abs(degrees)))}&quot;, timeout=abs(degrees) / 30 + 7)
+
+    def set_speed(self, cm_s):
+        v = int(min(self.max_speed, max(self.min_speed, cm_s)))
+        self.order(f&quot;speed {v}&quot;)
+        self.speed = v
+        return v
+
+    # ── seguridad (se llaman desde otro hilo: tienen que ser rápidos) ──
+    def emergency(self):
+        self.abort_event.set()
+        for _ in range(3):   # UDP no garantiza la entrega: se repite
+            try:
+                self.sock.sendto(b&quot;emergency&quot;, (IP, PUERTO))
+            except (OSError, AttributeError):
+                pass
+        self.flying = False
+
+    def safe_land(self):
+        self.abort_event.set()   # la misión suelta el socket en menos de 0,2 s
+        try:
+            ok = self.send(&quot;land&quot;, timeout=15, abortable=False).lower() == &quot;ok&quot;
+        except DroneError:
+            return False
+        if ok:
+            self.flying = False
+        return ok</code></pre>
+<ul>
+<li><code>send()</code> manda una orden y espera la respuesta como mucho <code>timeout</code> segundos, revisando cada 0,2 s si hay que abortar.</li>
+<li>El <code>lock</code> evita que la telemetría y una orden de vuelo usen el socket a la vez y se mezclen sus respuestas.</li>
+<li>Si tu dron también da la altura, pregúntala en <code>telemetry()</code> como la batería: con ella, DroneScript aplica los límites de altura.</li>
+</ul>
+</section>
+
+<section>
+<h2>Paso a paso</h2>
+<ol>
+<li><strong>Prepara el archivo.</strong> Parte de una plantilla. Cambia <code>id</code>, <code>nombre</code> y <code>clase</code> (el nombre de la clase tiene que coincidir con <code>"clase"</code>), y guárdalo en una carpeta tuya.</li>
+<li><strong>Escribe los métodos</strong> con las órdenes de tu dron, empezando por <code>connect</code>, <code>telemetry</code>, <code>takeoff</code> y <code>land</code>.</li>
+<li><strong>Impórtalo:</strong> <strong>Seleccionar dron</strong> → <strong>+ Importar modelo de dron</strong> → elige tu archivo. La app lo revisa sin ejecutarlo y muestra nombre, librerías que usa y su huella SHA-256. Si le falta un método obligatorio o hay un error de escritura, te dice cuál. Pulsa <strong>Importar</strong>.</li>
+<li><strong>Conéctalo:</strong> aparece en la lista de drones como «importado». Elígelo y pulsa <strong>Conectar</strong>: es la primera vez que se ejecuta su código.</li>
+<li><strong>Pruébalo con cuidado:</strong> primero sólo <code>takeoff</code> y <code>land</code>, con Emergency a mano. Luego un movimiento corto. Revisa la consola: ahí salen los errores y lo que escribas con <code>self.log("info", "texto")</code>.</li>
+<li><strong>Para cambiarlo,</strong> edita tu archivo y vuelve a importarlo: reemplaza al anterior, que queda en <code>Documentos\DroneScript\modelos\papelera\</code>.</li>
+</ol>
+<p><strong>Seguridad:</strong> un modelo es código Python con los mismos permisos que DroneScript. Si te pasan uno, impórtalo sólo si confías en quien lo hizo y compara la huella que te den con la que muestra la app.</p>
+</section>
+
+</main>
+<footer>DroneScript · programación por bloques para DJI Tello, CoDrone EDU, Parrot Anafi y VEX AIR</footer>
+</body>
+</html>
