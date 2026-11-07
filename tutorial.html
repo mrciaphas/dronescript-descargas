@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tutorial: DroneScript</title>
+<title>Tutorial: librerías y bloques propios — DroneScript</title>
 <meta name="description" content="Tutorial paso a paso, de principio a fin, con dos ejemplos: detectar manos con MediaPipe y crear tus propias rutinas de vuelo.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='2' y='2' width='60' height='60' rx='13' fill='%230d1117'/%3E%3Cg stroke='%232f81f7' stroke-width='4.4'%3E%3Cpath d='M32 32 15 15M32 32 49 15M32 32 15 49M32 32 49 49'/%3E%3Cg fill='%23161b22' stroke-width='2.2'%3E%3Ccircle cx='15' cy='15' r='9.4'/%3E%3Ccircle cx='49' cy='15' r='9.4'/%3E%3Ccircle cx='15' cy='49' r='9.4'/%3E%3Ccircle cx='49' cy='49' r='9.4'/%3E%3C/g%3E%3C/g%3E%3Crect x='24' y='24' width='16' height='16' fill='%232f81f7'/%3E%3C/svg%3E">
 <style>
@@ -82,12 +82,12 @@ ul, ol { padding-left: 22px; } ul li { margin-bottom: 6px; }
 <body>
 <nav><div class="wrap"><a href="./">&larr; DroneScript</a></div></nav>
 <main class="wrap">
-<h1 class="page">Agregar </h1>
+<h1 class="page">Agregar librerías y bloques propios a DroneScript </h1>
 <p class="lead">Tutorial paso a paso, de principio a fin, con dos ejemplos: detectar manos con MediaPipe y crear tus propias rutinas de vuelo.</p>
 <p class="downloads"><a href="tutorial/Tutorial_DroneScript_librerias.docx" download>Descargar este tutorial en Word</a>
 <a href="librerias.html">Versión corta, sólo con las plantillas</a></p>
-<h2>Antes de empezar</h2>
-<ul><li><strong>DroneScript 1.5 o más nuevo.</strong> Al final de la paleta de bloques tiene que aparecer el botón <strong>Extensiones y librerías…</strong>. Si no está, actualiza con el botón de versión de la barra superior o descarga la última versión de la página de descargas.</li><li><strong>Internet en el PC</strong> para instalar librerías. Ojo: cuando el PC se conecta al Wi-Fi del dron se queda sin internet, así que instala todo antes de conectarte al dron.</li><li>Un editor de texto: el Bloc de notas sirve; mejor Visual Studio Code o Thonny, que colorean el código.</li><li>Para la parte de manos, un <strong>DJI Tello</strong> (la detección necesita una cámara). Para las rutinas basta el <strong>Simulador</strong>.</li></ul>
+<h2>Requisitos</h2>
+<ul><li><strong>DroneScript 1.5 o más nuevo.</strong> Al final de la paleta de bloques tiene que aparecer el botón <strong>Extensiones y librerías…</strong>. Si no está, actualiza con el botón de versión de la barra superior o descarga la última versión de la página de descargas.</li><li><strong>Internet en el PC</strong> para instalar librerías.cuando el PC se conecta al Wi-Fi del dron se queda sin internet, así que instala todo antes de conectarte al dron.</li><li>Un editor de texto: el Bloc de notas sirve</li></ul>
 <figure><img src="img/tutorial/01_paleta.jpg" alt="Al final de la paleta: el botón Extensiones y librerías…" width="520" loading="lazy"><figcaption>Al final de la paleta: el botón Extensiones y librerías…</figcaption></figure>
 <h2>La idea: librería y extensión</h2>
 <ul><li><strong>Una librería</strong> es código que ya escribió otra persona y que sabe hacer algo difícil, como MediaPipe, que encuentra los 21 puntos de una mano en una foto. Se instala desde PyPI, el almacén de librerías de Python, igual que con <code>pip install</code>.</li><li><strong>Una extensión</strong> es un archivo <code>.py</code> que escribes tú. Declara los bloques nuevos de la paleta y lo que hace cada uno. Puede usar librerías o sólo tu propio código.</li></ul>
