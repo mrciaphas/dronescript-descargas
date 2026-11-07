@@ -86,7 +86,7 @@ ul, ol { padding-left: 22px; } ul li { margin-bottom: 6px; }
 <p class="lead">Tutorial paso a paso, de principio a fin: primero un dron virtual para aprender cómo funciona un modelo, y después tu propio dron por Wi-Fi.</p>
 <p class="downloads"><a href="tutorial/Tutorial_DroneScript_dron.docx" download>Descargar este tutorial en Word</a>
 <a href="dron-nuevo.html">Versión corta, sólo con las plantillas</a></p>
-<h2>Antes de empezar</h2>
+<h2>Requisitos</h2>
 <ul><li><strong>DroneScript 1.5 o más nuevo.</strong> En la ventana <strong>Seleccionar dron</strong> tiene que aparecer la tarjeta <strong>+ Importar modelo de dron</strong>. Si no está, actualiza con el botón de versión de la barra superior o descarga la última versión de la página de descargas.</li><li><strong>El manual o SDK de tu dron</strong>: qué órdenes acepta y por dónde (Wi-Fi, USB, Bluetooth). Sin eso no hay forma de saber qué mandarle.</li><li>Un editor de texto: el Bloc de notas sirve; mejor Visual Studio Code o Thonny, que colorean el código.</li><li>Para la Parte 1 no hace falta ningún dron: es un dron virtual que escribe en la consola lo que haría.</li></ul>
 <h2>La idea: un modelo de dron</h2>
 <p>DroneScript ya se encarga de los bloques, los límites del panel (altura, velocidad, hover), las teclas de seguridad y el aterrizaje automático. Un <strong>modelo</strong> es un archivo <code>.py</code> que sólo traduce órdenes simples (despegar, avanzar 50 cm, girar 90°) al idioma de tu dron. Tiene dos partes:</p>
