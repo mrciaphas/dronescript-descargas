@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DroneScript — Editor de código para drones</title>
+<meta name="description" content="DroneScript: editor de código Python para drones. Escribe, conecta y vuela.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='2' y='2' width='60' height='60' rx='13' fill='%230d1117'/%3E%3Cg stroke='%232f81f7' stroke-width='4.4'%3E%3Cpath d='M32 32 15 15M32 32 49 15M32 32 15 49M32 32 49 49'/%3E%3Cg fill='%23161b22' stroke-width='2.2'%3E%3Ccircle cx='15' cy='15' r='9.4'/%3E%3Ccircle cx='49' cy='15' r='9.4'/%3E%3Ccircle cx='15' cy='49' r='9.4'/%3E%3Ccircle cx='49' cy='49' r='9.4'/%3E%3C/g%3E%3C/g%3E%3Crect x='24' y='24' width='16' height='16' fill='%232f81f7'/%3E%3C/svg%3E">
+<style>
+:root {
+  --bg: #0d1117; --panel: #161b22; --card: #1c2128; --border: #30363d;
+  --pri: #e6edf3; --sec: #8b949e; --accent: #2f81f7; --teal: #3fb950; --yellow: #d29922;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body {
+  margin: 0; background: var(--bg); color: var(--pri);
+  font: 16px/1.6 -apple-system, "Segoe UI", system-ui, Roboto, sans-serif;
+}
+.wrap { max-width: 860px; margin: 0 auto; padding: 0 16px; }
+header { padding: 64px 0 40px; text-align: center; border-bottom: 1px solid var(--border);
+  background: radial-gradient(ellipse at top, rgba(47,129,247,.14), transparent 65%); }
+.logo { width: 88px; height: 88px; }
+h1 { margin: 12px 0 4px; font-size: 40px; letter-spacing: .06em; color: var(--accent); }
+.tag { margin: 0 auto 28px; max-width: 560px; color: var(--sec); font-size: 18px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px;
+  background: #238636; border: 1px solid #2ea043; border-radius: 8px;
+  color: #fff; font-size: 18px; font-weight: 600; text-decoration: none;
+}
+.btn:hover { background: #2ea043; }
+.btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.btn svg { width: 22px; height: 22px; }
+.meta { margin-top: 12px; color: var(--sec); font-size: 14px; }
+.meta a { color: var(--sec); }
+main { padding: 40px 0 24px; }
+section { margin-bottom: 40px; }
+h2 { font-size: 22px; margin: 0 0 14px; }
+p, li { color: #c9d1d9; }
+a { color: var(--accent); }
+.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+.card h3 { margin: 0 0 6px; font-size: 16px; }
+.card p { margin: 0; font-size: 15px; color: var(--sec); }
+.note { background: rgba(210,153,34,.1); border: 1px solid rgba(210,153,34,.45); border-left-width: 4px;
+  border-radius: 8px; padding: 16px 20px; }
+.note h2 { color: var(--yellow); }
+ol { padding-left: 22px; margin: 0; }
+li { margin-bottom: 8px; }
+li::marker { color: var(--sec); }
+kbd, code { background: var(--card); border: 1px solid var(--border); border-radius: 5px;
+  padding: 1px 6px; font: 14px Consolas, "SF Mono", monospace; color: var(--pri); }
+footer { border-top: 1px solid var(--border); padding: 24px 0 40px; color: var(--sec); font-size: 14px; text-align: center; }
+.swap { background: var(--panel); border-bottom: 1px solid var(--border); padding: 10px 0; text-align: center;
+  font-size: 14px; color: var(--sec); }
+.btn.soon { background: var(--card); border-color: var(--border); color: var(--sec); cursor: default; }
+@media (max-width: 600px) {
+  header { padding: 44px 0 32px; }
+  h1 { font-size: 32px; }
+  .btn { width: 100%; justify-content: center; }
+  .grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="swap"><div class="wrap">¿Empiezas a programar? <a href="./">DroneScript Edu</a> es la versión con bloques, para aprender.</div></div>
+<header>
+<div class="wrap">
+<svg class="logo" viewBox="0 0 64 64" aria-hidden="true">
+      <rect x="2" y="2" width="60" height="60" rx="13" fill="#0d1117" stroke="#30363d"/>
+      <g stroke="#2f81f7" stroke-width="4.4" stroke-linecap="round">
+        <path d="M32 32 15 15M32 32 49 15M32 32 15 49M32 32 49 49"/>
+        <g fill="#161b22" stroke-width="2.2">
+          <circle cx="15" cy="15" r="9.4"/><circle cx="49" cy="15" r="9.4"/>
+          <circle cx="15" cy="49" r="9.4"/><circle cx="49" cy="49" r="9.4"/>
+        </g>
+      </g>
+      <g fill="#e6edf3"><circle cx="15" cy="15" r="2.6"/><circle cx="49" cy="15" r="2.6"/>
+        <circle cx="15" cy="49" r="2.6"/><circle cx="49" cy="49" r="2.6"/></g>
+      <rect x="24" y="24" width="16" height="16" rx="1.5" fill="#2f81f7"/>
+      <circle cx="32" cy="29.5" r="2.8" fill="#e6edf3"/>
+    </svg>
+<h1>DRONESCRIPT</h1>
+<p class="tag">Programa drones en Python de verdad: escribe el código, conéctate y vuela desde el mismo editor.</p>
+<span class="btn soon">En desarrollo</span>
+<div class="meta">Todavía no hay versión para descargar · <a href="./">mientras tanto, DroneScript Edu</a></div>
+</div>
+</header>
+
+<main class="wrap">
+<section>
+<h2>Qué es</h2>
+<div class="grid">
+<div class="card"><h3>Python de verdad</h3><p>Escribes el código del dron directamente, sin bloques. El mismo Python que puedes usar fuera de la aplicación.</p></div>
+<div class="card"><h3>Conectar y listo</h3><p>Eliges el dron y pulsas Conectar: DroneScript se encarga de la conexión, sin pelearte con el SDK de cada fabricante.</p></div>
+<div class="card"><h3>Ejecutar y ver</h3><p>Ejecutar y Detener, la salida del programa en la consola y la telemetría en vivo, como en DroneScript Edu.</p></div>
+<div class="card"><h3>Seguridad</h3><p>Aterrizar y apagar motores con una tecla en todo momento, límites de altura y velocidad, aterrizaje al acabar.</p></div>
+<div class="card"><h3>Librerías y bloques propios</h3><p>Usa librerías de Python como MediaPipe y escribe tus propias funciones para el dron.</p></div>
+<div class="card"><h3>Tu propio dron</h3><p>Si tu dron no está en la lista, escribe su modelo en Python e impórtalo.</p></div>
+</div>
+<p>Sin autocompletado ni inteligencia artificial: un editor sencillo para escribir, ejecutar y ver qué pasa.</p>
+</section>
+
+<section>
+<h2>Drones</h2>
+<div class="grid">
+<div class="card"><h3>DJI Tello / Tello EDU</h3><p>Por Wi-Fi, con telemetría, cámara y visión.</p></div>
+<div class="card"><h3>CoDrone EDU</h3><p>Con su mando conectado al PC por USB.</p></div>
+<div class="card"><h3>Parrot Anafi</h3><p>Por Wi-Fi, sin Olympe: funciona en Windows.</p></div>
+<div class="card"><h3>VEX AIR</h3><p>Con el mando conectado al PC por USB. Se está investigando cómo mandarle el programa y ver su salida desde DroneScript.</p></div>
+<div class="card"><h3>Simulador</h3><p>Sin hardware, para probar el código antes de volar.</p></div>
+</div>
+</section>
+
+<section>
+<h2>Tutoriales para programadores</h2>
+<p>Se escribieron para la versión de prueba 1.5, que ya tenía estas funciones; se actualizarán cuando salga DroneScript.</p>
+<ol>
+<li><a href="tutorial.html">Agregar librerías y bloques propios</a>, con imágenes (también <a href="tutorial/Tutorial_DroneScript_librerias.docx" download>en Word</a> y en <a href="librerias.html">versión corta con plantillas</a>).</li>
+<li><a href="tutorial-dron.html">Agregar un dron nuevo</a>, con imágenes (también <a href="tutorial/Tutorial_DroneScript_dron.docx" download>en Word</a> y en <a href="dron-nuevo.html">versión corta con plantillas</a>).</li>
+</ol>
+</section>
+</main>
+
+<footer>DroneScript · editor de código Python para DJI Tello, CoDrone EDU, Parrot Anafi y VEX AIR</footer>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DroneScript — Descargar</title>
+<title>DroneScript Edu — Descargar</title>
 <meta name="description" content="Programación por bloques para drones DJI Tello, CoDrone EDU y VEX AIR. Descarga el instalador para Windows.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='2' y='2' width='60' height='60' rx='13' fill='%230d1117'/%3E%3Cg stroke='%232f81f7' stroke-width='4.4'%3E%3Cpath d='M32 32 15 15M32 32 49 15M32 32 15 49M32 32 49 49'/%3E%3Cg fill='%23161b22' stroke-width='2.2'%3E%3Ccircle cx='15' cy='15' r='9.4'/%3E%3Ccircle cx='49' cy='15' r='9.4'/%3E%3Ccircle cx='15' cy='49' r='9.4'/%3E%3Ccircle cx='49' cy='49' r='9.4'/%3E%3C/g%3E%3C/g%3E%3Crect x='24' y='24' width='16' height='16' fill='%232f81f7'/%3E%3C/svg%3E">
 <style>
@@ -51,6 +51,9 @@ li::marker { color: var(--sec); }
 kbd, code { background: var(--card); border: 1px solid var(--border); border-radius: 5px;
   padding: 1px 6px; font: 14px Consolas, "SF Mono", monospace; color: var(--pri); }
 footer { border-top: 1px solid var(--border); padding: 24px 0 40px; color: var(--sec); font-size: 14px; text-align: center; }
+.swap { background: var(--panel); border-bottom: 1px solid var(--border); padding: 10px 0; text-align: center;
+  font-size: 14px; color: var(--sec); }
+.btn.soon { background: var(--card); border-color: var(--border); color: var(--sec); cursor: default; }
 @media (max-width: 600px) {
   header { padding: 44px 0 32px; }
   h1 { font-size: 32px; }
@@ -60,6 +63,7 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; color: var(-
 </style>
 </head>
 <body>
+<div class="swap"><div class="wrap">¿Ya programas en Python? Mira <a href="dronescript.html">DroneScript</a>, el editor de código para drones.</div></div>
 <header>
   <div class="wrap">
     <svg class="logo" viewBox="0 0 64 64" aria-hidden="true">
@@ -76,9 +80,9 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; color: var(-
       <rect x="24" y="24" width="16" height="16" rx="1.5" fill="#2f81f7"/>
       <circle cx="32" cy="29.5" r="2.8" fill="#e6edf3"/>
     </svg>
-    <h1>DRONESCRIPT</h1>
-    <p class="tag">Programa drones con bloques. Arma la misión, mira el código Python que genera y vuela desde la aplicación.</p>
-    <a class="btn" id="download" href="https://github.com/mrciaphas/dronescript-descargas/releases/latest/download/DroneScript-Setup.exe">
+    <h1>DRONESCRIPT EDU</h1>
+    <p class="tag">Aprende a programar drones con bloques. Arma la misión, mira el código Python que genera y vuela desde la aplicación.</p>
+    <a class="btn" id="download" href="https://github.com/mrciaphas/dronescript-descargas/releases/download/v2.0.0/DroneScriptEdu-Setup.exe">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16"/></svg>
       Descargar para Windows
     </a>
@@ -96,9 +100,7 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; color: var(-
       <div class="card"><h3>Proyectos y ejemplos</h3><p>Guarda tus programas con nombre, deshaz cambios con Ctrl+Z y empieza desde ejemplos listos.</p></div>
       <div class="card"><h3>Visión para competencias</h3><p>Bloques que ven marcadores ArUco (como el 5x5 ID 100 de TMR e IMAV), compuertas de color y códigos QR, se acercan al marcador y se centran en un color. Con vista de cámara en vivo.</p></div>
       <div class="card"><h3>Módulo a bordo</h3><p>Un ESP32 por Bluetooth suelta la carga (servo o electroimán) y mide el sonido con su micrófono, para buscar la bocina. El programa del ESP32 viene incluido.</p></div>
-      <div class="card"><h3>Importa tu dron</h3><p>¿Tu dron no está en la lista? Con la plantilla puedes crear su modelo e importarlo, o importar el que te comparta alguien de confianza. <a href="tutorial-dron.html">Tutorial completo con imágenes</a> · <a href="dron-nuevo.html">versión corta con plantillas</a></p></div>
-      <div class="card"><h3>Agrega librerías y bloques</h3><p>Crea bloques propios en Python y usa librerías que DroneScript no trae, como MediaPipe para detectar manos. <a href="tutorial.html">Tutorial completo con imágenes</a> · <a href="librerias.html">versión corta con plantillas</a></p></div>
-    </div>
+                </div>
   </section>
 
   <section>
@@ -115,7 +117,7 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; color: var(-
   <section>
     <h2>Instalar</h2>
     <ol>
-      <li>Descarga <code>DroneScript-Setup.exe</code> con el botón de arriba.</li>
+      <li>Descarga <code>DroneScriptEdu-Setup.exe</code> con el botón de arriba.</li>
       <li>Ábrelo, elige el idioma (español o inglés) y sigue el asistente. Crea un acceso directo en el escritorio y en el menú Inicio.</li>
       <li>No hace falta instalar Python ni nada más.</li>
     </ol>
@@ -135,7 +137,7 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; color: var(-
     <h2>Conectar el DJI Tello</h2>
     <ol>
       <li>Carga la batería, enciende el Tello y conecta el PC a su Wi-Fi <code>TELLO-XXXXXX</code>. El PC pierde internet mientras tanto; es normal.</li>
-      <li>Abre DroneScript, pulsa el botón del dron (arriba a la derecha), elige <strong>DJI Tello</strong> y luego <strong>Conectar</strong>.</li>
+      <li>Abre DroneScript Edu, pulsa el botón del dron (arriba a la derecha), elige <strong>DJI Tello</strong> y luego <strong>Conectar</strong>.</li>
       <li>La barra superior debe mostrar batería, altura, etc. Si Windows pregunta por el firewall, permite DroneScript también en <strong>redes públicas</strong>: si no, no llega la telemetría.</li>
       <li>Arma el programa, revisa los límites (▲ Parámetros) y pulsa <strong>Ejecutar</strong>.</li>
     </ol>
@@ -147,7 +149,7 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; color: var(-
     <ol>
       <li>Enciende el dron y comprueba que está emparejado con su mando.</li>
       <li>Conecta el mando al PC con un cable USB de datos y ciérrale otros programas (CoDrone EDU Blockly…).</li>
-      <li>En DroneScript: botón del dron → <strong>CoDrone EDU</strong> → <strong>Conectar</strong>.</li>
+      <li>En DroneScript Edu: botón del dron → <strong>CoDrone EDU</strong> → <strong>Conectar</strong>.</li>
     </ol>
   </section>
 
@@ -181,6 +183,6 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; color: var(-
   </section>
 </main>
 
-<footer>DroneScript · programación por bloques para DJI Tello, CoDrone EDU y VEX AIR</footer>
+<footer>DroneScript Edu · programación por bloques para DJI Tello, CoDrone EDU, Parrot Anafi y VEX AIR</footer>
 </body>
 </html>
