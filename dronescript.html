@@ -82,11 +82,11 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; color: var(-
     </svg>
 <h1>DRONESCRIPT</h1>
 <p class="tag">Programa drones en Python de verdad: escribe el código, conéctate y vuela desde el mismo editor.</p>
-<a class="btn" id="download" href="https://github.com/mrciaphas/dronescript-descargas/releases/download/ide-v0.1.0/DroneScriptIDE-Setup.exe">
+<a class="btn" id="download" href="https://github.com/mrciaphas/dronescript-descargas/releases/download/ide-v0.1.1/DroneScriptIDE-Setup.exe">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16"/></svg>
   Descargar para Windows
 </a>
-<div class="meta">Versión 0.1.0, la primera: en pruebas · Windows 10 / 11 (64 bits) · <a href="https://github.com/mrciaphas/dronescript-descargas/releases/tag/ide-v0.1.0">notas de la versión</a></div>
+<div class="meta">Versión 0.1.1, en pruebas · Windows 10 / 11 (64 bits) · <a href="https://github.com/mrciaphas/dronescript-descargas/releases/tag/ide-v0.1.1">notas de la versión</a></div>
 </div>
 </header>
 
@@ -94,11 +94,11 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; color: var(-
 <section>
 <h2>Qué es</h2>
 <div class="grid">
-<div class="card"><h3>Python de verdad</h3><p>Escribes el código del dron directamente, sin bloques. <code>Tello</code>, <code>CoDrone</code>, <code>Anafi</code> y <code>Sim</code> ya están importados: <code>d = Anafi()</code> y a volar.</p></div>
-<div class="card"><h3>Conectar y listo</h3><p>Eliges el dron y pulsas Conectar: DroneScript habla con cada dron directamente, sin djitellopy ni Olympe.</p></div>
+<div class="card"><h3>El código de cada fabricante</h3><p>Escribes con los nombres de las librerías oficiales: <code>djitellopy</code> para el Tello, <code>Olympe</code> para el Anafi y <code>codrone_edu</code> para el CoDrone. El mismo archivo funciona en otro PC con esa librería instalada.</p></div>
+<div class="card"><h3>Sin pelear con SDKs</h3><p>No hay que instalar nada: DroneScript habla con cada dron directamente. El código de Olympe funciona en Windows, sin Olympe.</p></div>
 <div class="card"><h3>Ejecutar y ver</h3><p>Ejecutar (F5) y Detener, la salida en la consola, la línea que se está ejecutando, los errores con su línea y la telemetría en vivo.</p></div>
 <div class="card"><h3>Seguridad</h3><p><kbd>Esc</kbd> aterriza y <kbd>Ctrl</kbd>+<kbd>Espacio</kbd> apaga los motores, aunque estés escribiendo. Límites de altura y velocidad y aterrizaje al acabar.</p></div>
-<div class="card"><h3>GPS y objetivos</h3><p>Con el Parrot Anafi: la posición GPS en la barra, y <code>d.locate_target()</code> o un clic en la cámara dan las coordenadas de lo que mira el dron.</p></div>
+<div class="card"><h3>GPS y objetivos</h3><p>Con el Parrot Anafi: la posición GPS en la barra, un ejemplo que calcula las coordenadas de lo que mira la cámara, y un clic en la vista de cámara que las da al momento.</p></div>
 <div class="card"><h3>Visión</h3><p>ArUco, colores y QR con OpenCV, y vista de cámara en vivo. numpy y OpenCV vienen incluidos.</p></div>
 </div>
 <p>Sin autocompletado ni inteligencia artificial: un editor sencillo para escribir, ejecutar y ver qué pasa. Trae ejemplos listos para cada dron.</p>
@@ -140,7 +140,7 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; color: var(-
 <li>Abre un ejemplo de la lista (por ejemplo <code>simulador_cuadrado.py</code>) y pulsa <strong>Ejecutar</strong>: prueba siempre primero en el Simulador.</li>
 <li>Para el dron real, conecta el PC a su Wi-Fi (<code>TELLO-XXXXXX</code> o <code>ANAFI-XXXXXX</code>; con el Anafi, cierra FreeFlight) o el mando del CoDrone por USB.</li>
 <li>Si Windows pregunta por el firewall, permite DroneScript también en <strong>redes públicas</strong>: si no, no llega la telemetría.</li>
-<li>Los límites van en el código, en cm: <code>Anafi(max_alt=3000, max_speed=200)</code>. Por defecto, 250 cm de altura y 35 cm/s.</li>
+<li>Los ejemplos <code>tello_</code>, <code>anafi_</code> y <code>codrone_</code> son código oficial: ábrelos, pulsa <strong>Editar una copia</strong> y cámbialos a tu gusto.</li>
 </ol>
 </section>
 
