@@ -82,8 +82,11 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; color: var(-
     </svg>
 <h1>DRONESCRIPT</h1>
 <p class="tag">Programa drones en Python de verdad: escribe el código, conéctate y vuela desde el mismo editor.</p>
-<span class="btn soon">En desarrollo</span>
-<div class="meta">Todavía no hay versión para descargar · <a href="./">mientras tanto, DroneScript Edu</a></div>
+<a class="btn" id="download" href="https://github.com/mrciaphas/dronescript-descargas/releases/download/ide-v0.1.0/DroneScriptIDE-Setup.exe">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16"/></svg>
+  Descargar para Windows
+</a>
+<div class="meta">Versión 0.1.0, la primera: en pruebas · Windows 10 / 11 (64 bits) · <a href="https://github.com/mrciaphas/dronescript-descargas/releases/tag/ide-v0.1.0">notas de la versión</a></div>
 </div>
 </header>
 
@@ -91,30 +94,64 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; color: var(-
 <section>
 <h2>Qué es</h2>
 <div class="grid">
-<div class="card"><h3>Python de verdad</h3><p>Escribes el código del dron directamente, sin bloques. El mismo Python que puedes usar fuera de la aplicación.</p></div>
-<div class="card"><h3>Conectar y listo</h3><p>Eliges el dron y pulsas Conectar: DroneScript se encarga de la conexión, sin pelearte con el SDK de cada fabricante.</p></div>
-<div class="card"><h3>Ejecutar y ver</h3><p>Ejecutar y Detener, la salida del programa en la consola y la telemetría en vivo, como en DroneScript Edu.</p></div>
-<div class="card"><h3>Seguridad</h3><p>Aterrizar y apagar motores con una tecla en todo momento, límites de altura y velocidad, aterrizaje al acabar.</p></div>
-<div class="card"><h3>Librerías y bloques propios</h3><p>Usa librerías de Python como MediaPipe y escribe tus propias funciones para el dron.</p></div>
-<div class="card"><h3>Tu propio dron</h3><p>Si tu dron no está en la lista, escribe su modelo en Python e impórtalo.</p></div>
+<div class="card"><h3>Python de verdad</h3><p>Escribes el código del dron directamente, sin bloques. <code>Tello</code>, <code>CoDrone</code>, <code>Anafi</code> y <code>Sim</code> ya están importados: <code>d = Anafi()</code> y a volar.</p></div>
+<div class="card"><h3>Conectar y listo</h3><p>Eliges el dron y pulsas Conectar: DroneScript habla con cada dron directamente, sin djitellopy ni Olympe.</p></div>
+<div class="card"><h3>Ejecutar y ver</h3><p>Ejecutar (F5) y Detener, la salida en la consola, la línea que se está ejecutando, los errores con su línea y la telemetría en vivo.</p></div>
+<div class="card"><h3>Seguridad</h3><p><kbd>Esc</kbd> aterriza y <kbd>Ctrl</kbd>+<kbd>Espacio</kbd> apaga los motores, aunque estés escribiendo. Límites de altura y velocidad y aterrizaje al acabar.</p></div>
+<div class="card"><h3>GPS y objetivos</h3><p>Con el Parrot Anafi: la posición GPS en la barra, y <code>d.locate_target()</code> o un clic en la cámara dan las coordenadas de lo que mira el dron.</p></div>
+<div class="card"><h3>Visión</h3><p>ArUco, colores y QR con OpenCV, y vista de cámara en vivo. numpy y OpenCV vienen incluidos.</p></div>
 </div>
-<p>Sin autocompletado ni inteligencia artificial: un editor sencillo para escribir, ejecutar y ver qué pasa.</p>
+<p>Sin autocompletado ni inteligencia artificial: un editor sencillo para escribir, ejecutar y ver qué pasa. Trae ejemplos listos para cada dron.</p>
 </section>
 
 <section>
 <h2>Drones</h2>
 <div class="grid">
 <div class="card"><h3>DJI Tello / Tello EDU</h3><p>Por Wi-Fi, con telemetría, cámara y visión.</p></div>
-<div class="card"><h3>CoDrone EDU</h3><p>Con su mando conectado al PC por USB.</p></div>
-<div class="card"><h3>Parrot Anafi</h3><p>Por Wi-Fi, sin Olympe: funciona en Windows.</p></div>
-<div class="card"><h3>VEX AIR</h3><p>Con el mando conectado al PC por USB. Se está investigando cómo mandarle el programa y ver su salida desde DroneScript.</p></div>
-<div class="card"><h3>Simulador</h3><p>Sin hardware, para probar el código antes de volar.</p></div>
+<div class="card"><h3>CoDrone EDU</h3><p>Con su mando conectado al PC por USB. Sensor frontal, color, LED y pitido.</p></div>
+<div class="card"><h3>Parrot Anafi</h3><p>Por Wi-Fi, sin Olympe: funciona en Windows. Cámara, gimbal y GPS.</p></div>
+<div class="card"><h3>VEX AIR</h3><p>Por ahora escribes el código y DroneScript lo copia para VEXcode AIR. Se investiga descargarlo al mando por USB desde aquí.</p></div>
+<div class="card"><h3>Simulador</h3><p>Sin hardware, con cámara virtual y GPS simulado, para probar el código antes de volar.</p></div>
 </div>
 </section>
 
 <section>
+<h2>Instalar</h2>
+<ol>
+<li>Descarga <code>DroneScriptIDE-Setup.exe</code> con el botón de arriba.</li>
+<li>Ábrelo y sigue el asistente. Crea el acceso directo <strong>DroneScript IDE</strong>. Puede convivir con DroneScript Edu.</li>
+<li>No hace falta instalar Python ni nada más.</li>
+</ol>
+</section>
+
+<section class="note">
+<h2>Si Windows muestra «Windows protegió su PC»</h2>
+<p>El instalador no está firmado digitalmente, así que SmartScreen avisa la primera vez. Para continuar:</p>
+<ol>
+<li>Haz clic en <strong>Más información</strong>.</li>
+<li>Pulsa <strong>Ejecutar de todas formas</strong>.</li>
+</ol>
+<p>Si el navegador marca la descarga como poco común, elige <strong>Conservar</strong> en el menú de la descarga.</p>
+</section>
+
+<section>
+<h2>Primer vuelo</h2>
+<ol>
+<li>Abre un ejemplo de la lista (por ejemplo <code>simulador_cuadrado.py</code>) y pulsa <strong>Ejecutar</strong>: prueba siempre primero en el Simulador.</li>
+<li>Para el dron real, conecta el PC a su Wi-Fi (<code>TELLO-XXXXXX</code> o <code>ANAFI-XXXXXX</code>; con el Anafi, cierra FreeFlight) o el mando del CoDrone por USB.</li>
+<li>Si Windows pregunta por el firewall, permite DroneScript también en <strong>redes públicas</strong>: si no, no llega la telemetría.</li>
+<li>Los límites van en el código, en cm: <code>Anafi(max_alt=3000, max_speed=200)</code>. Por defecto, 250 cm de altura y 35 cm/s.</li>
+</ol>
+</section>
+
+<section>
+<h2>Tus archivos</h2>
+<p>Tus programas se guardan en <code>Documentos\DroneScript IDE\programas</code> (separados de los de DroneScript Edu). Desinstalar la app no los borra.</p>
+</section>
+
+<section>
 <h2>Tutoriales para programadores</h2>
-<p>Se escribieron para la versión de prueba 1.5, que ya tenía estas funciones; se actualizarán cuando salga DroneScript.</p>
+<p>Se escribieron para la versión de prueba 1.5 de DroneScript Edu; se actualizarán para DroneScript (instalar librerías e importar un dron propio llegarán en una próxima versión).</p>
 <ol>
 <li><a href="tutorial.html">Agregar librerías y bloques propios</a>, con imágenes (también <a href="tutorial/Tutorial_DroneScript_librerias.docx" download>en Word</a> y en <a href="librerias.html">versión corta con plantillas</a>).</li>
 <li><a href="tutorial-dron.html">Agregar un dron nuevo</a>, con imágenes (también <a href="tutorial/Tutorial_DroneScript_dron.docx" download>en Word</a> y en <a href="dron-nuevo.html">versión corta con plantillas</a>).</li>
